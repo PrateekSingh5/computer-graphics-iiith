@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2D Transforms</title>
+<link rel="stylesheet" href="demo.css">
+<style>
+	#transforms {
+	   width: 200px;
+	   height: 190px;
+	   overflow: auto;
+	   margin: 0;
+	   padding: 4px;
+	   background-color: white;
+	   border: thin solid #740b0b;
+	}
+	#transforms p {
+	    margin: 0px;
+	    padding: 1px;
+	}
+	#tools p {
+	    margin: 2px;
+	    padding: 0px;
+	    text-indent: 0px;
+	}
+	#transforms p.selected {
+	    background-color: #DDDDFF;
+	}
+	.input {
+	    margin-top:5px;
+	    margin-right:4px;
+	    padding: 2px;
+	    background-color: white;
+	    border: thin solid black;
+	    font-size:80%;
+	    float: left;
+	}
+</style>
+
+</head>
+<body onload="init()">
+
+	<div id="content">
+
+	<h3 id="headline">Modeling Transforms in 2D</h3>
+
+	<div id="canvas-holder">
+	<canvas id="maincanvas" width="400" height="400"></canvas>
+	</div>
+
+	<div id="tools">
+	<h4 style="margin-top:0pt; margin-bottom:3px">Transforms</h4>
+
+	<div id="transforms"width="150" height="200">
+
+	</div>
+	<p><button id="upButton" onclick="moveTransformUp()">Move Up</button>
+	   <button id="downButton" onclick="moveTransformDown()">Move Down</button></p>
+	<p><button onclick="clearTransforms()">Clear</button>
+	   <button onclick="deleteLast()" id="deleteButton">Delete Last</button></p>
+	<p style="margin-top:10px">Shape: <select id="shapeSelect" onChange="changeShape()">
+	   <option value="0">Letter F</option>
+	   <option value="1">Centered F</option>
+	   <option value="2">Square</option>
+	   <option value="3">Rectangle</option>
+	   <option value="4">Step</option>
+	   <option value="5">"Hello!"</option>
+	</select></p>
+	<p style="margin-top:5px"><label><input type="checkbox" id="animateCheckbox" onchange="doAnimateCB()">Animate</label></p>
+	<p style="margin-top:5px"><label><input type="checkbox" id="resultOnlyCB" onchange="doResultOnly()">Show Result Only</label></p>
+	</div>
+
+	<div class="input" style="clear:both">
+	Rotate&nbsp;<input type="text" size="3" id="deg"><button id="rotBut" onclick="addRotate()">Add</button>
+	</div>
+	<div class="input">
+	Translate&nbsp;<input type="text" size="3" id="tx">,<input itype="text" size="3" id="ty"><button id="transBut" onclick="addTranslate()"">Add</button>
+	</div>
+	<div class="input">
+	Scale&nbsp;<input type="text" size="3" id="sx">,<input type="text" size="3" id="sy"> <button id="scaleBut" onclick="addScale()">Add</button>
+	</div>
+
+	</div>
+
+
+
+	<div id="help-content" style="display:none">
+	<h3>About this demo...</h3>
+	<p>The demo shows an original object as a gray shape near the center of the
+	coordinate grid on the left.  On the right, there is a list of transforms.
+	The results of transforming the original shape are shown as colored shapes
+	on the coordinate grid.  The red shape is the result of transforming the
+	original shape by the <b>first</b> transform in the list.  The green shape is
+	the result of applying the second transform to the red shape; that is,
+	it is the result of applying <b>the first two</b> transforms to the original
+	shape.  The blue shape is the result of applying the <b>first three</b> transforms
+	to the original shape. Note that the transforms accumulate!  If you find
+	the colors hard to follow, turn on the "Animate" option.  You will see a
+	looping animation in which the shapes are added to the picture in the order in which
+	they are created.</p>
+	<p>One of the transforms in the list can be "selected." The selected transform
+	has a light blue background.  You can select a transform by clicking it.
+	Use the "Move up" and "Move down" buttons to move the selected transform
+	up or down in the list.  This will change the order in which the transforms
+	are applied, and so will change the sequence of shapes that is generated.</p>
+	<p>The tree small input panels on the bottom can be used to add transforms
+	to the list.  To add  a rotation, enter the number of <b>degrees</b>,
+	and click the "Add" button that is next to the input box.  For translation
+	and scale, enter two numbers, and click the corresponding "Add" button.
+	Be careful! The coordinate grid only shows coordinates in the range -5
+	to 5, so it's easy to get a shape that lies outside the visible grid.
+	The demo doesn't stop you from doing that.</p>
+	<p>You might start by moving transforms around in the original list.
+	Make sure that you understand how the shapes are produced.  Then
+	clear the list and make up your own transform.  Try comparing
+	rotate-then-translate to translate-then-rotate.  Try rotating
+	the object about a point other than the origin.  Try some negative
+	scale factors. Try arranging eight objects in a circle around
+	the origin.  (There is a limit of eight transforms.)  Try
+	to make a shear transformation from rotations and scalings.
+	(Hint: Start with a 45-degree rotation, followed by a
+	non-uniform scaling.)</p>
+	<p>Note by the way that transforms are applied to the object in
+	the order that they occur in the list.  Remember that if you
+	want to achieve the same effect in your code, you would have
+	to specify the transforms in the oppiosit order, and you
+	would have to do that before drawing the object.</p>
+	</div>
+
+
+
+<!-- support for help text -- do not change. -->
+
+<!--
+<div id="help-icon">
+<img src="./image/question32.png" onclick="showDemoHelp()"
+    title="Click here for information about this demo." width="32" height="32">
+</div>
+<div id="hide-help-icon">
+<img src="./image/close32.png" onclick="showDemoHelp()"
+    title="Click here to return to the demo." width="65" height="32">
+</div>
+<div id="helpBG" style="display:none"></div>   -->
+</body>
+</html>
