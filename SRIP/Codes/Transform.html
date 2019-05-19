@@ -4,16 +4,42 @@
 <meta charset="UTF-8">
 <title>2D Transforms</title>
 <link rel="stylesheet" href="demo.css">
+
 <style>
 	#transforms {
-	   width: 200px;
-	   height: 190px;
+	   width: 250px;
+	   height: 200px;
 	   overflow: auto;
 	   margin: 0;
 	   padding: 4px;
 	   background-color: white;
 	   border: thin solid #740b0b;
+	   
+
 	}
+	#World {
+	   width: 300px;
+	   height: 400px;
+	   overflow: auto;
+	   margin: 0;
+	   padding: 4px;
+	   background-color: white;
+	   border: thin solid #740b0b;
+	   
+
+	}
+	#Display {
+	   width: 300px;
+	   height: 400px;
+	   overflow: auto;
+	   margin: 0;
+	   padding: 4px;
+	   background-color: white;
+	   border: thin solid #740b0b;
+	   
+
+	}
+
 	#transforms p {
 	    margin: 0px;
 	    padding: 1px;
@@ -36,51 +62,82 @@
 	    float: left;
 	}
 </style>
-
+<script src="demo-core.js"></script>
 </head>
+
 <body onload="init()">
+<script src="2d-demo.js"></script>
+	<div id="content" >
 
-	<div id="content">
+		<h3 id="headline">Modeling Transforms in 2D</h3>
 
-	<h3 id="headline">Modeling Transforms in 2D</h3>
+		<div id="canvas-holder">  <!-- It is for the left most output box -->
+			<canvas id="maincanvas" width="400" height="400">
+				<!-- This is the Inside main canvas -->
+			</canvas>
+		</div>
 
-	<div id="canvas-holder">
-	<canvas id="maincanvas" width="400" height="400"></canvas>
-	</div>
+		<div id="tools">
+			<div > 
+				<button class="tablinks" onclick="openTab(event,'World')" >World</button>
+				<button class="tablinks" onclick="openTab(event,'Display')">Display</button> 
+			</div> 
 
-	<div id="tools">
-	<h4 style="margin-top:0pt; margin-bottom:3px">Transforms</h4>
+				<!-- Tab content -->
 
-	<div id="transforms"width="150" height="200">
+			
+			  
+			<div id="Display" class="tabcontent">
+			  
+			</div>
 
-	</div>
-	<p><button id="upButton" onclick="moveTransformUp()">Move Up</button>
-	   <button id="downButton" onclick="moveTransformDown()">Move Down</button></p>
-	<p><button onclick="clearTransforms()">Clear</button>
-	   <button onclick="deleteLast()" id="deleteButton">Delete Last</button></p>
-	<p style="margin-top:10px">Shape: <select id="shapeSelect" onChange="changeShape()">
-	   <option value="0">Letter F</option>
-	   <option value="1">Centered F</option>
-	   <option value="2">Square</option>
-	   <option value="3">Rectangle</option>
-	   <option value="4">Step</option>
-	   <option value="5">"Hello!"</option>
-	</select></p>
-	<p style="margin-top:5px"><label><input type="checkbox" id="animateCheckbox" onchange="doAnimateCB()">Animate</label></p>
-	<p style="margin-top:5px"><label><input type="checkbox" id="resultOnlyCB" onchange="doResultOnly()">Show Result Only</label></p>
-	</div>
+			<div id="World" class="tabcontent">
 
-	<div class="input" style="clear:both">
-	Rotate&nbsp;<input type="text" size="3" id="deg"><button id="rotBut" onclick="addRotate()">Add</button>
-	</div>
-	<div class="input">
-	Translate&nbsp;<input type="text" size="3" id="tx">,<input itype="text" size="3" id="ty"><button id="transBut" onclick="addTranslate()"">Add</button>
-	</div>
-	<div class="input">
-	Scale&nbsp;<input type="text" size="3" id="sx">,<input type="text" size="3" id="sy"> <button id="scaleBut" onclick="addScale()">Add</button>
-	</div>
+				
+					<div style="width:150px; height:200px" >
+						 <iframe src = "1.html" >
+		         			Sorry your browser does not support inline frames.
+		     			 </iframe>
 
-	</div>
+					</div>
+			
+			<!--
+			<div id="transforms"width="150" height="200">
+				
+			</div>
+			-->
+			
+					<div  style="width:300px; height:200px">
+
+						<p><button id="upButton" onclick="moveTransformUp()">Move Up</button>
+						   <button id="downButton" onclick="moveTransformDown()">Move Down</button></p>
+						<p><button onclick="clearTransforms()">Clear</button>
+						   <button onclick="deleteLast()" id="deleteButton">Delete Last</button></p>
+						<p style="margin-top:10px">Shape: <select id="shapeSelect" onChange="changeShape()">
+						   <option value="0">Letter F</option>
+						   <option value="1">Centered F</option>
+						   <option value="2">Square</option>
+						   <option value="3">Rectangle</option>
+						   <option value="4">Step</option>
+						   <option value="5">"Hello!"</option>
+						</select></p>
+						<p style="margin-top:5px"><label><input type="checkbox" id="animateCheckbox" onchange="doAnimateCB()">Animate</label></p>
+						<p style="margin-top:5px"><label><input type="checkbox" id="resultOnlyCB" onchange="doResultOnly()">Show Result Only</label></p>
+					</div>
+			</div>
+		</div>
+
+		<div class="input" style="clear:both">
+			Rotate&nbsp;<input type="text" size="3" id="deg"><button id="rotBut" onclick="addRotate()">Add</button>
+			</div>
+			<div class="input">
+			Translate&nbsp;<input type="text" size="3" id="tx">,<input itype="text" size="3" id="ty"><button id="transBut" onclick="addTranslate()"">Add</button>
+			</div>
+			<div class="input">
+			Scale&nbsp;<input type="text" size="3" id="sx">,<input type="text" size="3" id="sy"> <button id="scaleBut" onclick="addScale()">Add</button>
+		</div>
+
+	 </div>
 
 
 
