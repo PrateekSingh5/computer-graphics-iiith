@@ -7,19 +7,13 @@ body {
     user-select: none;
 }
 
-.tab button:hover {
-  background-color: #ddd;
-}
-
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
+.tab {
+  overflow: hidden;
   border: 1px solid #ccc;
-  border-top: none;
+  background-color: #f1f1f1;
 }
 
-
-
+/* Style the buttons that are used to open the tab content */
 .tab button {
   background-color: inherit;
   float: left;
@@ -31,13 +25,40 @@ body {
 }
 
 /* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
 
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #ccc;
 }
 
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.nav {
+   
+  list-style-type: none;
 
+ 
+}
+
+.nav div {
+  display: inline-block;
+  font-size: 20px;
+
+}
+
+.nav li {
+  display: inline-block;
+  font-size: 20px;
+
+}
 
 #content > h3 {
     margin-left: 70px;
@@ -51,11 +72,16 @@ body {
     margin-right:10px;
     border: 1px solid black;
     background-color: grey;
+    overflow: auto;
+    width: 400px;
+    height: 400px;
+    
    
 }
 
 canvas {
     display: block;
+ 
 
 }
 
@@ -123,4 +149,111 @@ canvas {
     z-index: 10;
     background-color: white;
     opacity: 0.75;
+}
+
+
+  #transforms {
+     width: 500px;
+     height: 200px;
+     overflow: auto;
+     margin: 0;
+     padding: 4px;
+     background-color: white;
+     border: thin solid #740b0b;
+  }
+
+    #box {
+     width: 500px;
+     height: 200px;
+     overflow: auto;
+     margin: 0;
+     padding: 4px;
+     background-color: white;
+     border: thin solid #740b0b;
+    
+
+  }
+  #World {
+     width: 500px;
+     height: 400px;
+     overflow: auto;
+     margin: 0;
+     padding: 4px;
+     background-color: white;
+     border: thin solid #740b0b;
+     
+
+  }
+  #Display {
+     width: 500px;
+     height: 400px;
+     overflow: auto;
+     margin: 0;
+     padding: 4px;
+     background-color: white;
+     border: thin solid #740b0b;
+     
+
+  }
+
+  #transforms p {
+      margin: 0px;
+      padding: 1px;
+      border: thin solid;
+  }
+  #tools p {
+      margin: 2px;
+      padding: 0px;
+      text-indent: 0px;
+  }
+  #transforms p.selected {
+      background-color: #DDDDFF;
+  }
+  .input {
+      margin-top:5px;
+      margin-right:4px;
+      padding: 2px;
+      background-color: white;
+      border: thin solid black;
+      font-size:80%;
+      float: left;
+  }
+
+ul, #myUL {
+  list-style-type: none;
+}
+
+/* Remove margins and padding from the parent ul */
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer; 
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg); 
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
 }

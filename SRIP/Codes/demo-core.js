@@ -10,6 +10,8 @@ window.requestAnimationFrame =
     };
     
 
+
+
 function showDemoHelp() {
     var helpBG = document.getElementById("helpBG");
     helpBG.style.display = "block";
@@ -165,3 +167,4 @@ function setUpTouchHander(element, touchStartFunc, touchMoveFunc, touchEndFunc, 
     }
     element.addEventListener("touchstart",doTouchStart);
 }
+

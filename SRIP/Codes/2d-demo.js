@@ -20,36 +20,43 @@ function draw() {
     graphics.strokeStyle = "black";
 
     graphics.save();
-    graphics.translate(200.5,200.5);
+    var canvas = document.getElementById('maincanvas');
+    var width = canvas.width;
+    var height = canvas.height;
+    graphics.translate(width/2,height/2);
     graphics.scale(40,-40);
     graphics.beginPath();
-    graphics.moveTo(-5,0);
-    graphics.lineTo(5,0);
-    graphics.moveTo(0,5);
-    graphics.lineTo(0,-5);
+    graphics.moveTo(-width,0);
+    graphics.lineTo(width,0);
+    graphics.moveTo(0,height);
+    graphics.lineTo(0,-height);
     graphics.restore();
     graphics.lineWidth = 2;
     graphics.stroke();
 
+
+
     graphics.save();
-    graphics.translate(200.5,200.5);
+    graphics.translate(width/2,height/2);
     graphics.scale(40,-40);
     graphics.beginPath();
-    for (i = -4; i <= 4; i++) {
-        graphics.moveTo(-5,i);
-        graphics.lineTo(5,i);
-        graphics.moveTo(i,-5);
-        graphics.lineTo(i,5);
+    for (i = -width; i <= width; i++) {
+        graphics.moveTo(-width,i);
+        graphics.lineTo(width,i);
+        graphics.moveTo(i,-height);
+        graphics.lineTo(i,height);
     }
     graphics.restore();
     graphics.lineWidth = 1;
     graphics.stroke();
 
+
+//for the numbering of the axis
     graphics.fillStyle = "#8080FF";
-    for (i = -5; i <= 5; i++) {
+    for (i = -width; i <= width; i++) {
         if (i != 0) {
-            graphics.fillText(String(i), 40*(i+5)+2, 198);
-            graphics.fillText(String(i), 202, 400 - 40*(i+5)-2);
+            graphics.fillText(String(i), 40*(i+width/80)+2, height/2 -2);
+            graphics.fillText(String(i), width/2 -2, height - 40*(i+height/80)-2);
         }
     }
     
@@ -215,6 +222,8 @@ function init() {
     graphics.font = "10pt monospace";
     transformContainer = document.getElementById("transforms");
     
+
+    
     draw();
 }
     function openTab(evt, tabName) {
@@ -238,4 +247,17 @@ function init() {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+function myFunction() {
+  var x = document.getElementById("mylist");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function new_window() {
+  window.open("new_window.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=200,width=400,height=200");
 }

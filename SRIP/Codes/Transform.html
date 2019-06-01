@@ -1,83 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+	 <script type = "text/javascript" src="2d-demo.js" ></script>
 <meta charset="UTF-8">
 <title>2D Transforms</title>
 <link rel="stylesheet" href="demo.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-	#transforms {
-	   width: 250px;
-	   height: 200px;
-	   overflow: auto;
-	   margin: 0;
-	   padding: 4px;
-	   background-color: white;
-	   border: thin solid #740b0b;
-	}
 
-	  #box {
-	   width: 250px;
-	   height: 200px;
-	   overflow: auto;
-	   margin: 0;
-	   padding: 4px;
-	   background-color: white;
-	   border: thin solid #740b0b;
-	  
-
-	}
-	#World {
-	   width: 300px;
-	   height: 400px;
-	   overflow: auto;
-	   margin: 0;
-	   padding: 4px;
-	   background-color: white;
-	   border: thin solid #740b0b;
-	   
-
-	}
-	#Display {
-	   width: 300px;
-	   height: 400px;
-	   overflow: auto;
-	   margin: 0;
-	   padding: 4px;
-	   background-color: white;
-	   border: thin solid #740b0b;
-	   
-
-	}
-
-	#transforms p {
-	    margin: 0px;
-	    padding: 1px;
-	}
-	#tools p {
-	    margin: 2px;
-	    padding: 0px;
-	    text-indent: 0px;
-	}
-	#transforms p.selected {
-	    background-color: #DDDDFF;
-	}
-	.input {
-	    margin-top:5px;
-	    margin-right:4px;
-	    padding: 2px;
-	    background-color: white;
-	    border: thin solid black;
-	    font-size:80%;
-	    float: left;
-	}
 </style>
-<script src="demo-core.js"></script>
+<script src="demo-core.js">
+
+
+</script>
 
 
 </head>
 <body onload="init()">
-<script src="2d-demo.js"></script>
+
 	<div id="content" >
 
 		<h3 id="headline">Modeling Transforms in 2D</h3>
@@ -89,10 +29,13 @@
 		</div>
 
 		<div id="tools">
-			<div > 
+			<div class="nav"> 
 				<button class="tablinks" onclick="openTab(event,'World')" autofocus >World</button>
 				<button class="tablinks" onclick="openTab(event,'Display')">Display</button> 
 			</div> 
+
+
+
 
 				<!-- Tab content -->
 
@@ -105,8 +48,8 @@
 			<div id="World" class="tabcontent">
 
 				
-					<div style="width:300px; height:200px; " >
-						 <iframe src = "1.html" style="width:280px; height:190px">
+					<div style="width:500px; height:150px; " >
+						 <iframe src = "1.html" style="width:480px; height:140px">
 		         			Sorry your browser does not support inline frames.
 		     			 </iframe>
 
@@ -118,18 +61,97 @@
 			</div>
 			-->
 			
-					<div id="box" style="width:300px; height:200px">
-						<div id="transforms" style="width:270px; height:100px">
-							<li>World
-								<option>Instance 1</option>
-							</li>
+					<div id="box" style="width:500px; height:200px">
+					<div id="tranforms" style="width:470px; height:100px">  
+						<div style="width:470px; height:200px;  border: thin solid black; overflow: auto; ">  
+
+							<ul id="myUL">
+								<li><span class="caret">World</span>
+									<ul class="nested">
+										<li><span class="caret">Instance 1</span>
+											<ul class="nested">
+												<li><span class="caret">Co-ordinate System 1</span>
+													<ul class="nested">
+														
+														<li>x-axis : < <input type="text" name="pin" maxlength="2" size="1"> , <input type="text" name="pin" maxlength="2" size="1">, <input type="text" name="pin" maxlength="2" size="1"> ></li>
+														<li>y-axis : < <input type="text" name="pin" maxlength="2" size="1"> , <input type="text" name="pin" maxlength="2" size="1">, <input type="text" name="pin" maxlength="2" size="1"> ></li>
+														<li>z-axis : < <input type="text" name="pin" maxlength="2" size="1"> , <input type="text" name="pin" maxlength="2" size="1">, <input type="text" name="pin" maxlength="2" size="1"> ></li>
+														<li>axes-size : <input type="text" name="pin" maxlength="2" size="1"></li>
+														<li><input type="checkbox" name="Units" value="unit"> Show Units  </li>
+														<li><input type="checkbox" id="DrawCheckbox" value="Draw" onclick="Remove_axes()"> Draw </li>
+													</ul>
+												</li>
+												<li><span class="caret">Shape 1</span>
+													<ul class="nested">
+														<li><span class="caret">Vertices</span>
+															<ul class="nested">
+															</ul>
+														<li><span class="caret">Triangle</span>
+															<ul class="nested">
+															</ul>
+
+													</ul>
+												</li>
+												<li><span class="caret">Transformation 1</span>
+													<ul class="nested">
+														<li><span class="caret">Scale by</span>
+															<ul class="nested">
+															</ul>
+														<li><span class="caret">Rotate by</span>
+															<ul class="nested">
+															</ul>
+														<li><span class="caret">Translate by</span>
+															<ul class="nested">
+															</ul>
+
+													</ul>
+												</li>
+
+									</ul>
+								</li>
+								<li><input type="radio" name="Global" value="" >Global Coordinate System</li>
+							</ul>
 						</div>
+					
+		
+<script  >
+
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+
+function myFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("DrawCheckbox");
+  // Get the output text
+  var text = document.getElementById("text");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+}
+
+</script> 
+				
+				<ul class="nav">
+						<li><button onclick="new_window()">New</button></li>
+						<li><button>Edit</button></li>
+						<li><button>Del</button></li>
+						<li><button>New Cam</button></li>
+					</ul>
+						
 
 
-
-						<p><button>New</button>
-							<button>Edit</button></p>
-
+<!--
 						<p><button id="upButton" onclick="moveTransformUp()">Move Up</button>
 						   <button id="downButton" onclick="moveTransformDown()">Move Down</button></p>
 						<p><button onclick="clearTransforms()">Clear</button>
@@ -147,7 +169,8 @@
 					</div>
 			</div>
 		</div>
-
+	</div>
+-->
 		<div class="input" style="clear:both">
 			Rotate&nbsp;<input type="text" size="3" id="deg"><button id="rotBut" onclick="addRotate()">Add</button>
 			</div>
@@ -158,7 +181,7 @@
 			Scale&nbsp;<input type="text" size="3" id="sx">,<input type="text" size="3" id="sy"> <button id="scaleBut" onclick="addScale()">Add</button>
 		</div>
 
-	 </div>
+	 
 
 
 
