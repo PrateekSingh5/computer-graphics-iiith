@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	 <script type = "text/javascript" src="2d-demo.js" ></script>
-<meta charset="UTF-8">
-<title>2D Transforms</title>
-<link rel="stylesheet" href="demo.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+	<script type = "text/javascript" src="2d-demo.js" ></script>
+	<meta charset="UTF-8">
+	<title>2D Transforms</title>
+	<link rel="stylesheet" href="demo.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-</style>
-<script src="demo-core.js">
+	<script src="demo-core.js"></script>
 
-
-</script>
+	<script src="../Libraries/three.js"></script>
+	<script src="../Libraries/OrbitControls.js"></script>
+	<script type="text/javascript" src="../Libraries/two.js"></script>
 
 
 </head>
 <body onload="init()">
-
+	
 	<div id="content" >
-
+		
 		<h3 id="headline">Modeling Transforms in 2D</h3>
 
 		<div id="canvas-holder" >  <!-- It is for the left most output box -->
-			<canvas id="maincanvas" width="400px" height="400"px>
+			
+			<canvas id="maincanvas" width="500px" height="500"px>
 				<!-- This is the Inside main canvas -->
 			</canvas>
+			<script src="DynamicCanvas.js"></script>
+			<script type="text/javascript">
+				drawXY();
+				camera2D();
+			</script>
+
+
+
 		</div>
 
 		<div id="tools">
@@ -61,9 +69,9 @@
 			</div>
 			-->
 			
-					<div id="box" style="width:500px; height:200px">
-					<div id="tranforms" style="width:470px; height:100px">  
-						<div style="width:470px; height:200px;  border: thin solid black; overflow: auto; ">  
+					<div id="box" style="width:480px; height:250px">
+					<div id="tranforms" style="width:460px; height:100px">  
+						<div style="width:440px; height:200px;  border: thin solid black; overflow: auto; ">  
 
 							<ul id="myUL">
 								<li><span class="caret">World</span>

@@ -72,9 +72,9 @@ body {
     margin-right:10px;
     border: 1px solid black;
     background-color: grey;
-    overflow: auto;
-    width: 400px;
-    height: 400px;
+    overflow: hidden;
+    width: 500px;
+    height: 500px;
     
    
 }
