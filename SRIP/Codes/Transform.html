@@ -1,254 +1,1423 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type = "text/javascript" src="2d-demo.js" ></script>
-	<meta charset="UTF-8">
-	<title>2D Transforms</title>
-	<link rel="stylesheet" href="demo.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<script src="demo-core.js"></script>
+<meta charset="UTF-8">
 
-	<script src="../Libraries/three.js"></script>
-	<script src="../Libraries/OrbitControls.js"></script>
-	<script type="text/javascript" src="../Libraries/two.js"></script>
+<title>Hierarchial Transformation</title>
 
+<link rel="stylesheet" href="demo.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
-<body onload="init()">
+
+<body style="background-color: #D3D3D3;" class="container border border-secondary" style="height: 90vh;" >
+	<h3 class="styletitle" style="text-align: center;"> Experiment 5a : Hierarchial Transformation </h3>
 	
-	<div id="content" >
+<!--canvas id="renderCanvas" style="width: 7px;height: 7px;"></canvas-->
+		<script src="../Libraries/three.js"></script>
+		<script src="../Libraries/three.min.js"></script>
+		<script src="../Libraries/OrbitControls.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+			
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+			
+		</script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+			
+		</script>
+
+
+
+<div id="canvas-holder" class="p-3 border bg-light">
+<canvas id="mainCanvas" ></canvas>
+<script type="text/javascript" src="demo-core.js"></script>
+<span class="smallsize" hidden>factor : </span><span id="sliderStatus" hidden>1</span>  
+</div>
+
+
+
+
+<div class="tab" style="width:168px;">
+
+ 
+  <button class="btn btn-outline-primary tablinks" onclick="openTab(event, 'World')" id="defaultOpen">World</button>
+  <button class="btn btn-outline-primary tablinks" onclick="openTab(event, 'Display')">Display</button>
+
+</div>
 		
-		<h3 id="headline">Modeling Transforms in 2D</h3>
+		
+	<div id="World" class="tabcontent"  >
 
-		<div id="canvas-holder" >  <!-- It is for the left most output box -->
-			
-			<canvas id="maincanvas" width="500px" height="500"px>
-				<!-- This is the Inside main canvas -->
-			</canvas>
-			<script src="DynamicCanvas.js"></script>
-			<script type="text/javascript">
-				drawXY();
-				camera2D();
-			</script>
+			<iframe src = "1.html" style="width:500px;height:180px;" class ="iframetab">
+		                Sorry your browser does not support inline frames.
+		             </iframe>
+		       			<br>
+		           
+		               <p class="h3">World</p>
 
+		               <br>
+		            		  
+		             <!--h4 >Click below to change the vertices and faces of the following figures
+		              <br> 
+		             ("Draw" checbox should be checked to observe the changes)</h4-->
+					<div class="wrld" >
 
+						<font size="4.5">
+					  <button class="wrldlinks btn btn-info" onclick="openFig(event, 'trianglee')" id="defaultx">Instance1</button>
 
-		</div>
+					  <button class="wrldlinks btn btn-info" onclick="openFig(event, 'cubee')">cube</button>
 
-		<div id="tools">
-			<div class="nav"> 
-				<button class="tablinks" onclick="openTab(event,'World')" autofocus >World</button>
-				<button class="tablinks" onclick="openTab(event,'Display')">Display</button> 
-			</div> 
+					  <button class="wrldlinks btn btn-info" onclick="openFig(event, 'dodecahedronn')">Dodecahedron</button>
 
-
-
-
-				<!-- Tab content -->
-
-			
-			  
-			<div id="Display" class="tabcontent">
-			  
-			</div>
-
-			<div id="World" class="tabcontent">
-
-				
-					<div style="width:500px; height:150px; " >
-						 <iframe src = "1.html" style="width:480px; height:140px">
-		         			Sorry your browser does not support inline frames.
-		     			 </iframe>
-
+					  <button class="wrldlinks btn btn-info" onclick="openFig(event, 'icosahedronn')">Icosahedron</button>
+					  </font>
+					 
 					</div>
-			
-			<!--
-			<div id="transforms"width="150" height="200">
 				
-			</div>
-			-->
-			
-					<div id="box" style="width:480px; height:250px">
-					<div id="tranforms" style="width:460px; height:100px">  
-						<div style="width:440px; height:200px;  border: thin solid black; overflow: auto; ">  
 
-							<ul id="myUL">
-								<li><span class="caret">World</span>
-									<ul class="nested">
-										<li><span class="caret">Instance 1</span>
-											<ul class="nested">
-												<li><span class="caret">Co-ordinate System 1</span>
-													<ul class="nested">
-														
-														<li>x-axis : < <input type="text" name="pin" maxlength="2" size="1"> , <input type="text" name="pin" maxlength="2" size="1">, <input type="text" name="pin" maxlength="2" size="1"> ></li>
-														<li>y-axis : < <input type="text" name="pin" maxlength="2" size="1"> , <input type="text" name="pin" maxlength="2" size="1">, <input type="text" name="pin" maxlength="2" size="1"> ></li>
-														<li>z-axis : < <input type="text" name="pin" maxlength="2" size="1"> , <input type="text" name="pin" maxlength="2" size="1">, <input type="text" name="pin" maxlength="2" size="1"> ></li>
-														<li>axes-size : <input type="text" name="pin" maxlength="2" size="1"></li>
-														<li><input type="checkbox" name="Units" value="unit"> Show Units  </li>
-														<li><input type="checkbox" id="DrawCheckbox" value="Draw" onclick="Remove_axes()"> Draw </li>
-													</ul>
-												</li>
-												<li><span class="caret">Shape 1</span>
-													<ul class="nested">
-														<li><span class="caret">Vertices</span>
-															<ul class="nested">
-															</ul>
-														<li><span class="caret">Triangle</span>
-															<ul class="nested">
-															</ul>
+				<div id="trianglee" class="wrldcontent" >
+					    <div class="card" style="height: 20rem;overflow: auto;">      
+				<div class="accordion" id="accordionExample">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
 
-													</ul>
-												</li>
-												<li><span class="caret">Transformation 1</span>
-													<ul class="nested">
-														<li><span class="caret">Scale by</span>
-															<ul class="nested">
-															</ul>
-														<li><span class="caret">Rotate by</span>
-															<ul class="nested">
-															</ul>
-														<li><span class="caret">Translate by</span>
-															<ul class="nested">
-															</ul>
+					    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					      	  <br>X :
+					          <input type="Number" id="TriX" class="tbox" value="0" />
+					          <br>Y :
+					          <input type="Number" id="TriY" class="tbox" value="0" />
+					          <br>Z :
+					          <input type="Number" id="TriZ" class="tbox" value="0" /><br>
+					          <button class=" " onclick="TriTrans()">Submit</button>
+					      </div>
+					    </div>
+					  </div>
+				</div>
 
-													</ul>
-												</li>
 
-									</ul>
-								</li>
-								<li><input type="radio" name="Global" value="" >Global Coordinate System</li>
-							</ul>
-						</div>
+				<div class="accordion" id="accordionExample2">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsex" aria-expanded="true" aria-controls="collapsex" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsex" class="collapse" aria-labelledby="headingx" data-parent="#accordionExample2">
+					      <div class="card-body">
+					      	 Scales by < 
+				<input type="Number" id="ScaletX" class="tbox" value="3"  />
+				<input type="Number" id="ScaletY" class="tbox" value="2" />
+				<input type="Number" id="ScaletZ" class="tbox" value="1"  /> in 
+				 <input type="Number"  id="fsct" class="tbox" value="1000" /> frames <br>
+
+				 Translate by < 
+					          <input type="Number" id="xtlt" class="tbox" value="-2" />
+					          
+					          <input type="Number" id="ytlt" class="tbox" value="-1" />
+					          
+					          <input type="Number" id="ztlt" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftlt" class="tbox" value="1000" /> frames <br>
+					          
+					         	Rotate by <
+
+					          <input type="Number" id="Rotavaluet" class="tbox" value="180" />
+					       axes 
+					          <input type="text" id="Rotat" class="tbox" value="Z" /> > in
+					          <input type="Number" id="frtt" class="tbox" value="1000" /> frames <br>
+					          
+					          Translate by <
+
+					          <input type="Number" id="xtl1t" class="tbox" value="2" />
+					          
+					          <input type="Number" id="ytl1t" class="tbox" value="1" />
+					          
+					          <input type="Number" id="ztl1t" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftl1t" class="tbox" value="1000" /> frames <br>
+					          
 					
-		
-<script  >
+			
+					      </div>
+					    </div>
+					  </div>
+				</div>
 
-var toggler = document.getElementsByClassName("caret");
-var i;
+				<div class="accordion" id="accordionExampleT">
+					  <div class="card">
 
-for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function() {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("caret-down");
-  });
-}
+					      <div class="card-body">
+					       <input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()" checked="true"/>Draw<br>
+					<input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active<br>
+					
+					      </div>
 
-function myFunction() {
-  // Get the checkbox
-  var checkBox = document.getElementById("DrawCheckbox");
-  // Get the output text
-  var text = document.getElementById("text");
-
-  // If the checkbox is checked, display the output text
-  if (checkBox.checked == true){
-    text.style.display = "block";
-  } else {
-    text.style.display = "none";
-  }
-}
-
-</script> 
+					  </div>
+				</div>
 				
-				<ul class="nav">
-						<li><button onclick="new_window()">New</button></li>
-						<li><button>Edit</button></li>
-						<li><button>Del</button></li>
-						<li><button>New Cam</button></li>
-					</ul>
+			
+			<div class="accordion" id="accordionExample3">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsey" aria-expanded="true" aria-controls="collapsey" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsey" class="collapse" aria-labelledby="headingy" data-parent="#accordionExample3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExample4">
+					  <div class="card">
+					    <div class="card-header" id="headingz">
+					      <h5 class="mb-0">
+					        <button type="button"  class="btn btn-dark" data-toggle="collapse" data-target="#collapsez" aria-expanded="true" aria-controls="collapsez" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsez" class="collapse" aria-labelledby="headingz" data-parent="#accordionExample4">
+					      <div class="card-body">
+					       
+					      	   	Click to change the original coordinates<br/>
+					    <input type="Number" id="TriangleiX1" class="tbox" value="4" />
+						<input type="Number" id="TriangleiY1" class="tbox" value="3" />
+						<input type="Number" id="TriangleiZ1" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="TriangleiX2" class="tbox" value="0" />
+						<input type="Number" id="TriangleiY2" class="tbox" value="4" />
+						<input type="Number" id="TriangleiZ2" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="TriangleiX3" class="tbox" value="2" />
+						<input type="Number" id="TriangleiY3" class="tbox" value="1" />
+						<input type="Number" id="TriangleiZ3" class="tbox" value="0" />
+						<br/>
+					       <button class=" " onclick="TriInput()">SubmitVertices</button>
+					<br/>
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+				
+				<div class="accordion" id="accordionExample5">
+					  <div class="card">
+					    <div class="card-header" id="headingxy">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsexy" aria-expanded="true" aria-controls="collapsexy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsexy" class="collapse" aria-labelledby="headingxy" data-parent="#accordionExample5">
+					      <div class="card-body">
+					          < Triangles (faces) ><br/>
+						<input type="Number" id="TriangleeX" class="tbox" value="0" />
+						<input type="Number" id="TriangleeY" class="tbox" value="1" />
+						<input type="Number" id="TriangleeZ" class="tbox" value="2" />
+						<br/>
+					
+					<button class=" " onclick="TriFaceInput()">SubmitFaces</button>
+					
+
+					       
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>	
+
+				<div class="accordion" id="accordionExample6">
+					  <div class="card">
+					    <div class="card-header" id="headingsc">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" class="btn btn-dark" data-toggle="collapse" data-target="#collapsesc" aria-expanded="true" aria-controls="collapsesc" style="width:200px;">
+					          Transformed Coordinates
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsesc" class="collapse" aria-labelledby="headingsc" data-parent="#accordionExample6">
+					      <div class="card-body">
+					       			
+			(<span id="coordTrix1">4</span> , <span id="coordTriy1">3</span> , <span id="coordTriz1">0</span>)<br>
+			(<span id="coordTrix2">0</span> , <span id="coordTriy2">4</span> , <span id="coordTriz2">0</span>)<br>
+			(<span id="coordTrix3">2</span> , <span id="coordTriy3">1</span> , <span id="coordTriz3">0</span>)<br>
+<br>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+		
+</div>
+</div>
+
+
+				<div id="cubee" class="wrldcontent" >
+		<div class="card" style="height: 20rem;overflow: auto;">      
+
+					<div class="accordion" id="accordionExamplec">
+					  <div class="card">
+					    <div class="card-header" id="headingcOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsecOne" aria-expanded="true" aria-controls="collapsecOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecOne" class="collapse" aria-labelledby="headingcOne" data-parent="#accordionExamplec">
+					      <div class="card-body">
+					       X:
+						<input type="Number" id="CubeX" class="tbox" value="0" /><br>
+						Y:
+					<input type="Number" id="CubeY" class="tbox" value="0" /><br>
+					Z:
+					<input type="Number" id="CubeZ" class="tbox" value="0" /><br>
+					<button class=" " onclick="CubeTrans()">Submit</button><br>
 						
+					      </div>
+					    </div>
+					  </div>
+				</div>
 
 
-<!--
-						<p><button id="upButton" onclick="moveTransformUp()">Move Up</button>
-						   <button id="downButton" onclick="moveTransformDown()">Move Down</button></p>
-						<p><button onclick="clearTransforms()">Clear</button>
-						   <button onclick="deleteLast()" id="deleteButton">Delete Last</button></p>
-						<p style="margin-top:10px">Shape: <select id="shapeSelect" onChange="changeShape()">
-						   <option value="0">Letter F</option>
-						   <option value="1">Centered F</option>
-						   <option value="2">Square</option>
-						   <option value="3">Rectangle</option>
-						   <option value="4">Step</option>
-						   <option value="5">"Hello!"</option>
-						</select></p>
-						<p style="margin-top:5px"><label><input type="checkbox" id="animateCheckbox" onchange="doAnimateCB()">Animate</label></p>
-						<p style="margin-top:5px"><label><input type="checkbox" id="resultOnlyCB" onchange="doResultOnly()">Show Result Only</label></p>
-					</div>
+
+				<div class="accordion" id="accordionExamplec2">
+					  <div class="card">
+					    <div class="card-header" id="headingcOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsecx" aria-expanded="true" aria-controls="collapsecx" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecx" class="collapse" aria-labelledby="headingcx" data-parent="#accordionExamplec2">
+					      <div class="card-body">
+					            	 Scales by < 
+				<input type="Number" id="ScalecX" class="tbox" value="3"  />
+				<input type="Number" id="ScalecY" class="tbox" value="2" />
+				<input type="Number" id="ScalecZ" class="tbox" value="1"  /> in 
+				 <input type="Number"  id="fscc" class="tbox" value="1000" /> frames <br>
+				  Translate by < 
+					          <input type="Number" id="xtlc" class="tbox" value="-2" />
+					          
+					          <input type="Number" id="ytlc" class="tbox" value="-1" />
+					          
+					          <input type="Number" id="ztlc" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftlc" class="tbox" value="1000" /> frames <br>
+					          
+					         	Rotate by <
+
+					          <input type="Number" id="Rotavaluec" class="tbox" value="180" />
+					       axes 
+					          <input type="text" id="Rotac" class="tbox" value="Z" /> > in
+					          <input type="Number" id="frtc" class="tbox" value="1000" /> frames <br>
+					          
+					          Translate by <
+
+					          <input type="Number" id="xtl1c" class="tbox" value="2" />
+					          
+					          <input type="Number" id="ytl1c" class="tbox" value="1" />
+					          
+					          <input type="Number" id="ztl1c" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftl1c" class="tbox" value="1000" /> frames <br>
+					          
+			
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+				<div class="accordion" id="accordionExampleC">
+					  <div class="card">
+
+					      <div class="card-body">
+					       <input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw<br>
+						<input type="checkbox" id="CubeActive" onclick="ActiveCube()"/>Active
+					
+					      </div>
+
+					  </div>
+				</div>
+			
+			<div class="accordion" id="accordionExamplec3">
+					  <div class="card">
+					    <div class="card-header" id="headingcOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsecy" aria-expanded="true" aria-controls="collapsecy" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecy" class="collapse" aria-labelledby="headingcy" data-parent="#accordionExamplec3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExamplec4">
+					  <div class="card">
+					    <div class="card-header" id="headingcz">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsecz" aria-expanded="true" aria-controls="collapsecz" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecz" class="collapse" aria-labelledby="headingcz" data-parent="#accordionExamplec4">
+					      <div class="card-body">
+					       Click to change the original coordinates<br/>
+					    <input type="Number" id="CubeiX1" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY1" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ1" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="CubeiX2" class="tbox" value="1" />
+						<input type="Number" id="CubeiY2" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ2" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="CubeiX3" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY3" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ3" class="tbox" value="1" />
+						<br/>
+	
+						<input type="Number" id="CubeiX4" class="tbox" value="1" />
+						<input type="Number" id="CubeiY4" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ4" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="CubeiX5" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY5" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ5" class="tbox" value="-1" />
+						<br/>
+						
+						<input type="Number" id="CubeiX6" class="tbox" value="1" />
+						<input type="Number" id="CubeiY6" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ6" class="tbox" value="-1" />
+						<br/>
+						
+						<input type="Number" id="CubeiX7" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY7" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ7" class="tbox" value="-1" />
+						<br/>
+						
+						<input type="Number" id="CubeiX8" class="tbox" value="1" />
+						<input type="Number" id="CubeiY8" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ8" class="tbox" value="-1" />
+						<br/>
+						
+					
+					<button class=" " onclick="CubeInput()">SubmitVertices</button>
+		
+
+					      
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+				
+				<div class="accordion" id="accordionExamplec5">
+					  <div class="card">
+					    <div class="card-header" id="headingcxy">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsecxy" aria-expanded="true" aria-controls="collapsecxy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecxy" class="collapse" aria-labelledby="headingcxy" data-parent="#accordionExamplec5">
+					      <div class="card-body">
+					      < faces (triangles) ><br/>
+						<input type="Number" id="CubeeX1" class="tbox" value="0" />
+						<input type="Number" id="CubeeY1" class="tbox" value="3" />
+						<input type="Number" id="CubeeZ1" class="tbox" value="2" />
+						<br/>
+
+						<input type="Number" id="CubeeX2" class="tbox" value="0" />
+						<input type="Number" id="CubeeY2" class="tbox" value="1" />
+						<input type="Number" id="CubeeZ2" class="tbox" value="3" />
+						<br/>
+
+						<input type="Number" id="CubeeX3" class="tbox" value="1" />
+						<input type="Number" id="CubeeY3" class="tbox" value="7" />
+						<input type="Number" id="CubeeZ3" class="tbox" value="3" />
+						<br/>
+	
+						<input type="Number" id="CubeeX4" class="tbox" value="1" />
+						<input type="Number" id="CubeeY4" class="tbox" value="5" />
+						<input type="Number" id="CubeeZ4" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="CubeeX5" class="tbox" value="5" />
+						<input type="Number" id="CubeeY5" class="tbox" value="6" />
+						<input type="Number" id="CubeeZ5" class="tbox" value="7" />
+						<br/>
+						
+						<input type="Number" id="CubeeX6" class="tbox" value="5" />
+						<input type="Number" id="CubeeY6" class="tbox" value="4" />
+						<input type="Number" id="CubeeZ6" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="CubeeX7" class="tbox" value="4" />
+						<input type="Number" id="CubeeY7" class="tbox" value="2" />
+						<input type="Number" id="CubeeZ7" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="CubeeX8" class="tbox" value="4" />
+						<input type="Number" id="CubeeY8" class="tbox" value="0" />
+						<input type="Number" id="CubeeZ8" class="tbox" value="2" />
+						<br/>
+						<input type="Number" id="CubeeX9" class="tbox" value="2" />
+						<input type="Number" id="CubeeY9" class="tbox" value="7" />
+						<input type="Number" id="CubeeZ9" class="tbox" value="6" />
+						<br/>
+
+						<input type="Number" id="CubeeX10" class="tbox" value="2" />
+						<input type="Number" id="CubeeY10" class="tbox" value="3" />
+						<input type="Number" id="CubeeZ10" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="CubeeX11" class="tbox" value="4" />
+						<input type="Number" id="CubeeY11" class="tbox" value="1" />
+						<input type="Number" id="CubeeZ11" class="tbox" value="0" />
+						<br/>
+	
+						<input type="Number" id="CubeeX12" class="tbox" value="4" />
+						<input type="Number" id="CubeeY12" class="tbox" value="5" />
+						<input type="Number" id="CubeeZ12" class="tbox" value="1" />
+						<br/>
+
+						
+					
+					<button class=" " onclick="CubeFaceInput()">SubmitFaces</button>
+
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>	
+
+				<div class="accordion" id="accordionExamplec6">
+					  <div class="card">
+					    <div class="card-header" id="headingcsc">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" class="btn btn-dark" data-toggle="collapse" data-target="#collapsecsc" aria-expanded="true" aria-controls="collapsecsc" style="width:200px;">
+					         Transformed Coordinates
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecsc" class="collapse" aria-labelledby="headingcsc" data-parent="#accordionExample6">
+					      <div class="card-body">
+					       			
+			(<span id="coordCubex1">-1</span> , <span id="coordCubey1">-1</span> , <span id="coordCubez1">1</span>)<br>
+			(<span id="coordCubex2">1</span> , <span id="coordCubey2">-1</span> , <span id="coordCubez2">1</span>)<br>
+			(<span id="coordCubex3">-1</span> , <span id="coordCubey3">1</span> , <span id="coordCubez3">1</span>)<br>
+			(<span id="coordCubex4">1</span> , <span id="coordCubey4">1</span> , <span id="coordCubez4">1</span> )<br>
+			(<span id="coordCubex5">-1</span> , <span id="coordCubey5">-1</span> , <span id="coordCubez5">-1</span>)<br>
+			(<span id="coordCubex6">1</span> , <span id="coordCubey6">-1</span> , <span id="coordCubez6">-1</span>)<br>
+			(<span id="coordCubex7">-1</span> , <span id="coordCubey7">1</span> , <span id="coordCubez7">-1</span>)<br>
+			(<span id="coordCubex8">1</span> , <span id="coordCubey8">1</span> , <span id="coordCubez8">-1</span>)<br>
+							      </div>
+					    </div>
+					  </div>
+				</div>
+
+
+
+</div>
+</div>
+
+
+		<div id="dodecahedronn" class="wrldcontent">
+			<div class="card" style="height: 20rem;overflow: auto;">      
+
+
+			<div class="accordion" id="accordionExampled">
+					  <div class="card">
+					    <div class="card-header" id="headingdOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsedOne" aria-expanded="true" aria-controls="collapsedOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedOne" class="collapse" aria-labelledby="headingdOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					      			X:
+					<input type="Number" id="DodecX" class="tbox" value="0" /><br>
+								Y:
+					<input type="Number" id="DodecY" class="tbox" value="0" /><br>
+					Z:
+
+					<input type="Number" id="DodecZ" class="tbox" value="0" /><br>
+
+					<button class=" " onclick="DodecTrans()">Submit
+					</button>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+
+				<div class="accordion" id="accordionExampled2">
+					  <div class="card">
+					    <div class="card-header" id="headingdOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsedx" aria-expanded="true" aria-controls="collapsedx" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedx" class="collapse" aria-labelledby="headingdx" data-parent="#accordionExampled2">
+					      <div class="card-body">
+					            	 Scales by < 
+				<input type="Number" id="ScaledX" class="tbox" value="3"  />
+				<input type="Number" id="ScaledY" class="tbox" value="2" />
+				<input type="Number" id="ScaledZ" class="tbox" value="1"  /> in 
+				 <input type="Number"  id="fscd" class="tbox" value="1000" /> frames <br>
+
+				  Translate by < 
+					          <input type="Number" id="xtld" class="tbox" value="-2" />
+					          
+					          <input type="Number" id="ytld" class="tbox" value="-1" />
+					          
+					          <input type="Number" id="ztld" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftld" class="tbox" value="1000" /> frames <br>
+					          
+					         	Rotate by <
+
+					          <input type="Number" id="Rotavalued" class="tbox" value="180" />
+					       axes 
+					          <input type="text" id="Rotad" class="tbox" value="Z" /> > in
+					          <input type="Number" id="frtd" class="tbox" value="1000" /> frames <br>
+					          
+					          Translate by <
+
+					          <input type="Number" id="xtl1d" class="tbox" value="2" />
+					          
+					          <input type="Number" id="ytl1d" class="tbox" value="1" />
+					          
+					          <input type="Number" id="ztl1d" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftl1d" class="tbox" value="1000" /> frames <br>
+					          
+			
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+				<div class="accordion" id="accordionExampleD">
+					  <div class="card">
+
+					      <div class="card-body">
+					    
+					       <input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>Draw<br>
+					<input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>Active
+					<br>
+					      </div>
+
+					  </div>
+				</div>
+			
+			<div class="accordion" id="accordionExampled3">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsedy" aria-expanded="true" aria-controls="collapsedy" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedy" class="collapse" aria-labelledby="headingdy" data-parent="#accordionExample3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExampled4">
+					  <div class="card">
+					    <div class="card-header" id="headingdz">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsedz" aria-expanded="true" aria-controls="collapsedz" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedz" class="collapse" aria-labelledby="headingdz" data-parent="#accordionExampled4">
+					      <div class="card-body">
+					       Click to change the original coordinates<br/>
+					    <input type="Number" id="DodecahedroniX1" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY1" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ1" class="tbox" value="0.58" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX2" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniY2" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniZ2" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX3" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniY3" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniZ3" class="tbox" value="0" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroniX4" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniY4" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniZ4" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX5" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniY5" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniZ5" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX6" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY6" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniZ6" class="tbox" value="0.36" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX7" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY7" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniZ7" class="tbox" value="-0.36" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX8" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniY8" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ8" class="tbox" value="-0.93" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX9" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniY9" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ9" class="tbox" value="-0.93" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX10" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY10" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniZ10" class="tbox" value="-0.36" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX11" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY11" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniZ11" class="tbox" value="-0.36" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroniX12" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniY12" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ12" class="tbox" value="0.93" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX13" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniY13" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ13" class="tbox" value="0.93" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX14" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY14" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ14" class="tbox" value="-0.58" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX15" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY15" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ15" class="tbox" value="0.58" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX16" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY16" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ16" class="tbox" value="-0.58" />
+						<br/>
+						<input type="Number" id="DodecahedroniX17" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY17" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ17" class="tbox" value="0.58" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX18" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY18" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ18" class="tbox" value="-0.58" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX19" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY19" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ19" class="tbox" value="0.58" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroniX20" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY20" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ20" class="tbox" value="-0.58" />
+						<br/>
+					
+					<button class=" " onclick="DodecaInput()">SubmitVertices</button>
+					<br/>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+				
+				<div class="accordion" id="accordionExampled5">
+					  <div class="card">
+					    <div class="card-header" id="headingdxy">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsedxy" aria-expanded="true" aria-controls="collapsedxy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedxy" class="collapse" aria-labelledby="headingdxy" data-parent="#accordionExampled5">
+					      <div class="card-body">
+					          
+					< faces (triangles) ><br/>
+						<input type="Number" id="DodecahedroneX1" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY1" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneZ1" class="tbox" value="18" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX2" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY2" class="tbox" value="18" />
+						<input type="Number" id="DodecahedroneZ2" class="tbox" value="11" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX3" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY3" class="tbox" value="11" />
+						<input type="Number" id="DodecahedroneZ3" class="tbox" value="14" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX4" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY4" class="tbox" value="13" />
+						<input type="Number" id="DodecahedroneZ4" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX5" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY5" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneZ5" class="tbox" value="17" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX6" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY6" class="tbox" value="17" />
+						<input type="Number" id="DodecahedroneZ6" class="tbox" value="2" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX7" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY7" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneZ7" class="tbox" value="19" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX8" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY8" class="tbox" value="19" />
+						<input type="Number" id="DodecahedroneZ8" class="tbox" value="8" />
+						<br/>
+						<input type="Number" id="DodecahedroneX9" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY9" class="tbox" value="8" />
+						<input type="Number" id="DodecahedroneZ9" class="tbox" value="15" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX10" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY10" class="tbox" value="16" />
+						<input type="Number" id="DodecahedroneZ10" class="tbox" value="12" />
+						<br/>
+						<input type="Number" id="DodecahedroneX11" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY11" class="tbox" value="12" />
+						<input type="Number" id="DodecahedroneZ11" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX12" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY12" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroneZ12" class="tbox" value="4" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX13" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY13" class="tbox" value="15" />
+						<input type="Number" id="DodecahedroneZ13" class="tbox" value="6" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX14" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY14" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneZ14" class="tbox" value="5" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX15" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY15" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneZ15" class="tbox" value="16" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX16" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY16" class="tbox" value="14" />
+						<input type="Number" id="DodecahedroneZ16" class="tbox" value="5" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX17" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY17" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneZ17" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX18" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY18" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneZ18" class="tbox" value="13" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX19" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneY19" class="tbox" value="17" />
+						<input type="Number" id="DodecahedroneZ19" class="tbox" value="9" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX20" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneY20" class="tbox" value="9" />
+						<input type="Number" id="DodecahedroneZ20" class="tbox" value="10" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX21" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneY21" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneZ21" class="tbox" value="18" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX22" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneY22" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroneZ22" class="tbox" value="10" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX23" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneY23" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneZ23" class="tbox" value="9" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX24" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneY24" class="tbox" value="9" />
+						<input type="Number" id="DodecahedroneZ24" class="tbox" value="19" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX25" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneY25" class="tbox" value="8" />
+						<input type="Number" id="DodecahedroneZ25" class="tbox" value="19" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX26" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneY26" class="tbox" value="19" />
+						<input type="Number" id="DodecahedroneZ26" class="tbox" value="9" />
+						<br/>
+						<input type="Number" id="DodecahedroneX27" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneY27" class="tbox" value="9" />
+						<input type="Number" id="DodecahedroneZ27" class="tbox" value="17" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX28" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneY28" class="tbox" value="15" />
+						<input type="Number" id="DodecahedroneZ28" class="tbox" value="8" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX29" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneY29" class="tbox" value="8" />
+						<input type="Number" id="DodecahedroneZ29" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX30" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneY30" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneZ30" class="tbox" value="13" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX31" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneY31" class="tbox" value="14" />
+						<input type="Number" id="DodecahedroneZ31" class="tbox" value="11" />
+						<br/>
+						<input type="Number" id="DodecahedroneX32" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneY32" class="tbox" value="11" />
+						<input type="Number" id="DodecahedroneZ32" class="tbox" value="12" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX33" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneY33" class="tbox" value="12" />
+						<input type="Number" id="DodecahedroneZ33" class="tbox" value="16" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX34" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneY34" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroneZ34" class="tbox" value="12" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX35" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneY35" class="tbox" value="12" />
+						<input type="Number" id="DodecahedroneZ35" class="tbox" value="11" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX36" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneY36" class="tbox" value="11" />
+						<input type="Number" id="DodecahedroneZ36" class="tbox" value="18" />
+						<br/>
+
+					<button class=" " onclick="DodecFaceInput()">SubmitFaces</button>
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+					      </div>
+					    </div>
+					  </div>
+				</div>	
+
+				<div class="accordion" id="accordionExampled6">
+					  <div class="card">
+					    <div class="card-header" id="headingdsc">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapsedsc" aria-expanded="true" aria-controls="collapsedsc" style="width:200px;">
+					          Transformed Coordinates
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedsc" class="collapse" aria-labelledby="headingdsc" data-parent="#accordionExampled6">
+					      <div class="card-body">
+					      	
+						( <span id="coordDodecx1">-0.58</span> , <span id="coordDodecy1">-0.58</span> , <span id="coordDodecz1">0.58</span>)<br>
+						( <span id="coordDodecx2"> 0.93</span> , <span id="coordDodecy2"> 0.36</span> , <span id="coordDodecz2">   0</span>)<br>
+						( <span id="coordDodecx3"> 0.93</span> , <span id="coordDodecy3">-0.36</span> , <span id="coordDodecz3">   0</span>)<br>
+						( <span id="coordDodecx4">-0.93</span> , <span id="coordDodecy4"> 0.36</span> , <span id="coordDodecz4">   0</span>)<br>
+						( <span id="coordDodecx5">-0.93</span> , <span id="coordDodecy5">-0.36</span> , <span id="coordDodecz5">   0</span>)<br>
+						( <span id="coordDodecx6">    0</span> , <span id="coordDodecy6"> 0.93</span> , <span id="coordDodecz6"> 0.36</span>)<br>
+						( <span id="coordDodecx7">    0</span> , <span id="coordDodecy7"> 0.93</span> , <span id="coordDodecz7">-0.36</span>)<br>
+						( <span id="coordDodecx8"> 0.36</span> , <span id="coordDodecy8">    0</span> , <span id="coordDodecz8">-0.93</span>)<br>
+						( <span id="coordDodecx9">-0.36</span> , <span id="coordDodecy9">    0</span> , <span id="coordDodecz9">-0.93</span>)<br>
+						( <span id="coordDodecx10">    0</span> , <span id="coordDodec10">-0.93</span> , <span id="coordDodecz10">-0.36</span >)<br>
+						( <span id="coordDodecx11">    0</span> , <span id="coordDodec11">-0.93</span> , <span id="coordDodecz11"> 0.36</span >)<br>
+						( <span id="coordDodecx12"> 0.36</span> , <span id="coordDodec12">    0</span> , <span id="coordDodecz12"> 0.93</span >)<br>
+						( <span id="coordDodecx13">-0.36</span> , <span id="coordDodecy13">   0</span> , <span id="coordDodecz13">-0.93</span >)<br>
+						( <span id="coordDodecx14"> 0.58</span> , <span id="coordDodecy14"> 0.58</span> , <span id="coordDodecz14">-0.58</span>)<br>
+						( <span id="coordDodecx15"> 0.58</span> , <span id="coordDodecy15"> 0.58</span> , <span id="coordDodecz15"> 0.58</span>)<br>
+						( <span id="coordDodecx16">-0.58</span> , <span id="coordDodecy16"> 0.58</span> , <span id="coordDodecz16">-0.58</span>)<br>
+						( <span id="coordDodecx17">-0.58</span> , <span id="coordDodecy17"> 0.58</span> , <span id="coordDodecz17"> 0.58</span>)<br>
+						( <span id="coordDodecx18"> 0.58</span> , <span id="coordDodecy18">-0.58</span> , <span id="coordDodecz18">-0.58</span>)<br>
+						( <span id="coordDodecx19"> 0.58</span> , <span id="coordDodecy19">-0.58</span> , <span id="coordDodecz19"> 0.58</span>)<br>
+						( <span id="coordDodecx20">-0.58</span> , <span id="coordDodecy20">-0.58</span> , <span id="coordDodecz20">-0.58</span>)<br>
+					   
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+
+			</div>
+</div>
+
+
+				<div id="icosahedronn" class="wrldcontent">
+				<div class="card" style="height: 20rem;overflow: auto;">       
+
+
+				 <div class="accordion" id="accordionExamplei">
+					  <div class="card">
+					    <div class="card-header" id="headingiOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseiOne" aria-expanded="true" aria-controls="collapseiOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseiOne" class="collapse" aria-labelledby="headingiOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					       	X:
+					 	<input type="Number" id="IcoX" class="tbox" value="0" /><br>
+					 	Y:
+						<input type="Number" id="IcoY" class="tbox" value="0" /><br>
+						Z:
+						<input type="Number" id="IcoZ" class="tbox" value="0" /><br>
+
+						<button class=" " onclick="IcosaTrans()">Submit</button>
+					 	<br>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+
+				<div class="accordion" id="accordionExamplei2">
+					  <div class="card">
+					    <div class="card-header" id="headingiOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseix" aria-expanded="true" aria-controls="collapseix" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseix" class="collapse" aria-labelledby="headingix" data-parent="#accordionExamplei2">
+					      <div class="card-body">
+					       	 Scales by < 
+				<input type="Number" id="ScalehX" class="tbox" value="3" />
+				<input type="Number" id="ScalehY" class="tbox" value="2"/>
+				<input type="Number" id="ScalehZ" class="tbox" value="1" /> in 
+				 <input type="Number"  id="fsch" class="tbox" value="1000" /> frames <br>
+
+				  Translate by < 
+					          <input type="Number" id="xtli" class="tbox" value="-2" />
+					          
+					          <input type="Number" id="ytli" class="tbox" value="-1" />
+					          
+					          <input type="Number" id="ztli" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftli" class="tbox" value="1000" /> frames <br>
+					          
+					         	Rotate by <
+
+					          <input type="Number" id="Rotavaluei" class="tbox" value="180" />
+					       axes 
+					          <input type="text" id="Rotai" class="tbox" value="Z" /> > in
+					          <input type="Number" id="frti" class="tbox" value="1000" /> frames <br>
+					          
+					          Translate by <
+
+					          <input type="Number" id="xtl1i" class="tbox" value="2" />
+					          
+					          <input type="Number" id="ytl1i" class="tbox" value="1" />
+					          
+					          <input type="Number" id="ztl1i" class="tbox" value="0" /> > in
+					          <input type="Number" id="ftl1i" class="tbox" value="1000" /> frames <br>
+					          
+			
+				 	  </div>
+					    </div>
+					  </div>
+				</div>
+
+				<div class="accordion" id="accordionExampleIx">
+					  <div class="card">
+
+					      <div class="card-body">
+					    <input type="checkbox" id="IcosahedronDraw" onclick="DrawIcosahedron()"/>Draw<br>
+					<input type="checkbox" id="IcosahedronActive" onclick="ActiveIcosahedron()"/>Active<br>
+					  
+					      </div>
+
+					  </div>
+				</div>
+			
+			<div class="accordion" id="accordionExamplei3">
+					  <div class="card">
+					    <div class="card-header" id="headingiOne">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseiy" aria-expanded="true" aria-controls="collapseiy" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseiy" class="collapse" aria-labelledby="headingiy" data-parent="#accordionExamplei3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExamplei4">
+					  <div class="card">
+					    <div class="card-header" id="headingiz">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseiz" aria-expanded="true" aria-controls="collapseiz" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseiz" class="collapse" aria-labelledby="headingiz" data-parent="#accordionExamplei4">
+					      <div class="card-body">
+					       
+					      Click to change the original coordinates<br/>
+					    <input type="Number" id="IcosahedroniX1" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY1" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniZ1" class="tbox" value="0.85" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX2" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniY2" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ2" class="tbox" value="0.53" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX3" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniY3" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ3" class="tbox" value="-0.53" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroniX4" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniY4" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ4" class="tbox" value="-0.53" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX5" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniY5" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ5" class="tbox" value="0.53" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX6" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniY6" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniZ6" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX7" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniY7" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniZ7" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX8" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniY8" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniZ8" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX9" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniY9" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniZ9" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX10" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY10" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniZ10" class="tbox" value="-0.85" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX11" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY11" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniZ11" class="tbox" value="-0.85" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroniX12" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY12" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniZ12" class="tbox" value="0.85" />
+						<br/>
+
+					
+					<button class=" " onclick="IcosaInput()">SubmitVertices</button>
+					<br/>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+				
+				<div class="accordion" id="accordionExamplei5">
+					  <div class="card">
+					    <div class="card-header" id="headingixy">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseixy" aria-expanded="true" aria-controls="collapseixy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseixy" class="collapse" aria-labelledby="headingixy" data-parent="#accordionExamplei5">
+					      <div class="card-body">
+					     
+					< faces (triangles) ><br/>
+						<input type="Number" id="IcosahedroneX1" class="tbox" value="6" />
+						<input type="Number" id="IcosahedroneY1" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneZ1" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX2" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneY2" class="tbox" value="7" />
+						<input type="Number" id="IcosahedroneZ2" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX3" class="tbox" value="5" />
+						<input type="Number" id="IcosahedroneY3" class="tbox" value="4" />
+						<input type="Number" id="IcosahedroneZ3" class="tbox" value="3" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroneX4" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneY4" class="tbox" value="3" />
+						<input type="Number" id="IcosahedroneZ4" class="tbox" value="4" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX5" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneY5" class="tbox" value="5" />
+						<input type="Number" id="IcosahedroneZ5" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX6" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneY6" class="tbox" value="6" />
+						<input type="Number" id="IcosahedroneZ6" class="tbox" value="5" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX7" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneY7" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneZ7" class="tbox" value="9" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX8" class="tbox" value="3" />
+						<input type="Number" id="IcosahedroneY8" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneZ8" class="tbox" value="10" />
+						<br/>
+						<input type="Number" id="IcosahedroneX9" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneY9" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneZ9" class="tbox" value="7" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroneX10" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneY10" class="tbox" value="7" />
+						<input type="Number" id="IcosahedroneZ10" class="tbox" value="8" />
+						<br/>
+						<input type="Number" id="IcosahedroneX11" class="tbox" value="1" />
+						<input type="Number" id="IcosahedroneY11" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneZ11" class="tbox" value="11" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX12" class="tbox" value="4" />
+						<input type="Number" id="IcosahedroneY12" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneZ12" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX13" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneY13" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneZ13" class="tbox" value="6" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroneX14" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneY14" class="tbox" value="6" />
+						<input type="Number" id="IcosahedroneZ14" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX15" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneY15" class="tbox" value="5" />
+						<input type="Number" id="IcosahedroneZ15" class="tbox" value="3" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX16" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneY16" class="tbox" value="4" />
+						<input type="Number" id="IcosahedroneZ16" class="tbox" value="5" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX17" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneY17" class="tbox" value="7" />
+						<input type="Number" id="IcosahedroneZ17" class="tbox" value="2" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX18" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneY18" class="tbox" value="1" />
+						<input type="Number" id="IcosahedroneZ18" class="tbox" value="7" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX19" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneY19" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneZ19" class="tbox" value="3" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX20" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneY20" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneZ20" class="tbox" value="4" />
+						<br/>
+
+
+					<button class=" " onclick="IcosaFaceInput()">SubmitFaces</button>
+
+					       
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>	
+
+				<div class="accordion" id="accordionExamplei6">
+					  <div class="card">
+					    <div class="card-header" id="headingisc">
+					      <h5 class="mb-0">
+					        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseisc" aria-expanded="true" aria-controls="collapseisc" style="width:200px;">
+					          Transformed Coordinates
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseisc" class="collapse" aria-labelledby="headingisc" data-parent="#accordionExamplei6">
+					      <div class="card-body">
+					       			<b> 
+				(<span id="coordIcosax1">    0</span> , <span id="coordIcosay1">-0.53</span> , <span id="coordIcosaz1">0.85</span>)   <br>
+				(<span id="coordIcosax2"> 0.85</span> , <span id="coordIcosay2">    0</span> , <span id="coordIcosaz2"> 0.53</span>)    <br>
+				(<span id="coordIcosax3"> 0.85</span> , <span id="coordIcosay3">    0</span> , <span id="coordIcosaz3">-0.53</span>)   <br>
+				(<span id="coordIcosax4">-0.85</span> , <span id="coordIcosay4">    0</span> , <span id="coordIcosaz4">-0.53</span>)  <br>
+				(<span id="coordIcosax5">-0.85</span> , <span id="coordIcosay5">    0</span> , <span id="coordIcosaz5"> 0.53</span>)   <br>
+				(<span id="coordIcosax6">-0.53</span> , <span id="coordIcosay6"> 0.85</span> , <span id="coordIcosaz6">    0</span>)   <br>
+				(<span id="coordIcosax7"> 0.53</span> , <span id="coordIcosay7"> 0.85</span> , <span id="coordIcosaz7">    0</span>)  <br>
+				(<span id="coordIcosax8"> 0.53</span> , <span id="coordIcosay8">-0.85</span> , <span id="coordIcosaz8">    0</span>)   <br>
+				(<span id="coordIcosax9">-0.53</span> , <span id="coordIcosay9">-0.85</span> , <span id="coordIcosaz9">    0</span>)  <br>
+				(<span id="coordIcosax10">    0</span> , <span id="coordIcosay10">-0.53</span> , <span id="coordIcosaz10">-0.85</span>)<br>
+				(<span id="coordIcosax11">    0</span> , <span id="coordIcosay11"> 0.53</span> , <span id="coordIcosaz11">-0.85</span>)<br>
+				(<span id="coordIcosax12">    0</span> , <span id="coordIcosay12"> 0.53</span> , <span id="coordIcosaz12"> 0.85</span>)<br>
+						</b><br>
+			
+					      </div>
+					    </div>
+					  </div>
+				</div>
 			</div>
 		</div>
-	</div>
--->
-		<div class="input" style="clear:both">
-			Rotate&nbsp;<input type="text" size="3" id="deg"><button id="rotBut" onclick="addRotate()">Add</button>
-			</div>
-			<div class="input">
-			Translate&nbsp;<input type="text" size="3" id="tx">,<input itype="text" size="3" id="ty"><button id="transBut" onclick="addTranslate()"">Add</button>
-			</div>
-			<div class="input">
-			Scale&nbsp;<input type="text" size="3" id="sx">,<input type="text" size="3" id="sy"> <button id="scaleBut" onclick="addScale()">Add</button>
 		</div>
-
-	 
-
-
-
-	<div id="help-content" style="display:none">
-	<h3>About this demo...</h3>
-	<p>The demo shows an original object as a gray shape near the center of the
-	coordinate grid on the left.  On the right, there is a list of transforms.
-	The results of transforming the original shape are shown as colored shapes
-	on the coordinate grid.  The red shape is the result of transforming the
-	original shape by the <b>first</b> transform in the list.  The green shape is
-	the result of applying the second transform to the red shape; that is,
-	it is the result of applying <b>the first two</b> transforms to the original
-	shape.  The blue shape is the result of applying the <b>first three</b> transforms
-	to the original shape. Note that the transforms accumulate!  If you find
-	the colors hard to follow, turn on the "Animate" option.  You will see a
-	looping animation in which the shapes are added to the picture in the order in which
-	they are created.</p>
-	<p>One of the transforms in the list can be "selected." The selected transform
-	has a light blue background.  You can select a transform by clicking it.
-	Use the "Move up" and "Move down" buttons to move the selected transform
-	up or down in the list.  This will change the order in which the transforms
-	are applied, and so will change the sequence of shapes that is generated.</p>
-	<p>The tree small input panels on the bottom can be used to add transforms
-	to the list.  To add  a rotation, enter the number of <b>degrees</b>,
-	and click the "Add" button that is next to the input box.  For translation
-	and scale, enter two numbers, and click the corresponding "Add" button.
-	Be careful! The coordinate grid only shows coordinates in the range -5
-	to 5, so it's easy to get a shape that lies outside the visible grid.
-	The demo doesn't stop you from doing that.</p>
-	<p>You might start by moving transforms around in the original list.
-	Make sure that you understand how the shapes are produced.  Then
-	clear the list and make up your own transform.  Try comparing
-	rotate-then-translate to translate-then-rotate.  Try rotating
-	the object about a point other than the origin.  Try some negative
-	scale factors. Try arranging eight objects in a circle around
-	the origin.  (There is a limit of eight transforms.)  Try
-	to make a shear transformation from rotations and scalings.
-	(Hint: Start with a 45-degree rotation, followed by a
-	non-uniform scaling.)</p>
-	<p>Note by the way that transforms are applied to the object in
-	the order that they occur in the list.  Remember that if you
-	want to achieve the same effect in your code, you would have
-	to specify the transforms in the oppiosit order, and you
-	would have to do that before drawing the object.</p>
-	</div>
+	
 
 
 
-<!-- support for help text -- do not change. -->
 
-<!--
-<div id="help-icon">
-<img src="./image/question32.png" onclick="showDemoHelp()"
-    title="Click here for information about this demo." width="32" height="32">
+<div id="Display" class="tabcontent">
+
+
+
+			<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true" />Show the simulation in 3D<br><br>	
+				<input type="checkbox" id="lockVertices" onclick="lockV()" checked="true"/>Lock vertices in the screen<br><br>
+				<script type="text/javascript"> lockV(); </script>
+				<input type="checkbox" id="xyAxis" onclick="drawXY()" checked="true"/>Draw XY grid in the screen<br><br>
+				<script type="text/javascript"> drawXY(); </script>
+				<input type="checkbox" id="yzAxis" onclick="drawYZ()"/>Draw YZ grid in the screen<br><br>
+				<input type="checkbox" id="zxAxis" onclick="drawZX()" />Draw ZX grid in the screen<br><br>
+				<!--<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true"/>Show the simulation in 3D<br><br>-->
+				<input type="checkbox" id="animation" onclick="startAnimation()" checked="true"/>Show Animation structure
+				
+				<!--br><br>Scale by individual directions -><br> X:
+				<input type="Number" id="ScaleIX" class="tbox" value="1" />
+				<td><button class=" " onclick="IXScale()">Submit</button><span id="Xlimit" style="color:  red;"></span></td><br>Y:
+				<input type="Number" id="ScaleIY" class="tbox" value="1" />
+				<td><button class=" " onclick=" IYScale()">Submit</button><span id="Ylimit" style="color:  red;"></span> </td><br>Z:
+				<input type="Number" id="ScaleIZ" class="tbox" value="1" />
+				<td><button class=" " onclick="IZScale()">Submit</button><span id="Zlimit" style="color:  red;"></span></td-->
+				
+				
 </div>
-<div id="hide-help-icon">
-<img src="./image/close32.png" onclick="showDemoHelp()"
-    title="Click here to return to the demo." width="65" height="32">
-</div>
-<div id="helpBG" style="display:none"></div>   -->
+<script >document.getElementById("defaultOpen").click();document.getElementById("defaultx").click();
+
+</script>
+<input type="range" id="myslider" class="custom-range" min="1" max="8" value="1" step="0.001" onchange="sliderChange(this.value)"  onclick="addScale()"/> 
 </body>
 </html>

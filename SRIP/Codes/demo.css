@@ -1,89 +1,135 @@
+ sliders {
+        background: none;
+    }
+
+
 body {
-    background-color: lightgray;
-    -webkit-user-select: none; /* turning off text selection  / Webkit */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE 10  */
-    -o-user-select: none;    /* Opera */
-    user-select: none;
+  padding: 0px;
+  border: 0px;
+  background-color: #D3D3D3;
 }
 
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-}
 
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
+.slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 12px;
+  border-radius: 5px;
+  background: #A3A3A3;
   outline: none;
+  opacity: 1;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 0%;
+  background: #00008b;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 14px;
+  border-radius: 50%;
+  background:#A3A3A3 ;
+  cursor: pointer;
 }
 
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
+html, body {
+  height: 100%;
+}
+table.tabb {
+  border: 1px solid;
+  text-align: center;
+  border-color: rgba(0, 132, 242, 0.5);
+  margin-top: 2px;
 }
 
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-.nav {
-   
-  list-style-type: none;
-
- 
+td, tr{
+  padding: 2px 2px 2px 2px;
+  font-weight: bold;
 }
 
-.nav div {
-  display: inline-block;
-  font-size: 20px;
-
+.bigBox {
+  width: 25%;
+  height: 93%;
+  float: right;
+  text-align: center;
+  font-family: Robot, sans-serif;
+  padding: 3px 8px 1px 8px;
+  border: 4px solid #93E84E;
+  margin: 0%;
+  background-color: #F5FFF2;
 }
 
-.nav li {
-  display: inline-block;
-  font-size: 20px;
-
+.smallBox {
+  border: 1px solid red;
+  font-family: Robot, sans-serif;
+  margin-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 6px;
+  color: red;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: left;
+  background-color: #F5FFF2;
 }
 
-#content > h3 {
-    margin-left: 70px;
-    margin-top: 5px;
-    margin-bottom: 8pt;
-
+.innerBox {
+  padding: 2px 6px 2px 7px;
+  border: 1px solid gray;
+  font-family: system-ui;
+  font-size: 10px;
+  text-align: left;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  font-weight: bold;
 }
+
+.tbox {
+  width: 60px;
+  height: 30px;
+}
+
+.displayFeatures {
+  resize: both;
+  width: 500px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border: 2px solid black;
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+  color: blue;
+  padding: 10px;
+  text-align: center;
+  background-color: #F5FFF2;
+}
+
+
 
 #canvas-holder {
     float:left;
-    margin-right:10px;
+    width: 540px;
+    height: 540px;
     border: 1px solid black;
     background-color: grey;
-    overflow: hidden;
-    width: 500px;
-    height: 500px;
-    
+}
+
+
+#canvasholder {
+    float:left;
    
+    border: 1px solid black;
+    background-color: white;
 }
 
-canvas {
-    display: block;
- 
-
-}
 
 #tools {
     float:left;
@@ -152,108 +198,263 @@ canvas {
 }
 
 
-  #transforms {
-     width: 500px;
-     height: 200px;
-     overflow: auto;
-     margin: 0;
-     padding: 4px;
-     background-color: white;
-     border: thin solid #740b0b;
-  }
-
-    #box {
-     width: 500px;
-     height: 200px;
-     overflow: auto;
-     margin: 0;
-     padding: 4px;
-     background-color: white;
-     border: thin solid #740b0b;
-    
-
-  }
-  #World {
-     width: 500px;
-     height: 400px;
-     overflow: auto;
-     margin: 0;
-     padding: 4px;
-     background-color: white;
-     border: thin solid #740b0b;
-     
-
-  }
-  #Display {
-     width: 500px;
-     height: 400px;
-     overflow: auto;
-     margin: 0;
-     padding: 4px;
-     background-color: white;
-     border: thin solid #740b0b;
-     
-
-  }
-
-  #transforms p {
-      margin: 0px;
-      padding: 1px;
-      border: thin solid;
-  }
-  #tools p {
-      margin: 2px;
-      padding: 0px;
-      text-indent: 0px;
-  }
-  #transforms p.selected {
-      background-color: #DDDDFF;
-  }
-  .input {
-      margin-top:5px;
-      margin-right:4px;
-      padding: 2px;
-      background-color: white;
-      border: thin solid black;
-      font-size:80%;
-      float: left;
-  }
-
-ul, #myUL {
-  list-style-type: none;
+#tools p {
+    margin: 2px;
+    padding: 0px;
+    text-indent: 0px;
 }
 
-/* Remove margins and padding from the parent ul */
-#myUL {
-  margin: 0;
-  padding: 0;
+#box {
+   width: 250px;
+   height: 200px;
+   overflow: auto;
+   margin: 0;
+   padding: 4px;
+   background-color: white;
+   border: thin solid #740b0b;
+  
+}
+.input {
+    margin-top:5px;
+    margin-right:4px;
+    padding: 2px;
+    background-color: white;
+    border: thin solid black;
+    font-size:80%;
+    float: left;
 }
 
-/* Style the caret/arrow */
-.caret {
-  cursor: pointer; 
-  user-select: none; /* Prevent text selection */
+
+
+#renderCanvas {
+                
+            }
+
+
+
+
+
+#sliders {
+        background: none;
+    }
+
+
+
+
+.sliderx {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
 }
 
-/* Create the caret/arrow with a unicode, and style it */
-.caret::before {
-  content: "\25B6";
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
+.sliderx:hover {
+  opacity: 1;
 }
 
-/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-.caret-down::before {
-  transform: rotate(90deg); 
+.sliderx::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
 }
 
-/* Hide the nested list */
-.nested {
+.sliderx::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+#canvasholder {
+    /*float:left;*/
+
+    border: 1px solid black;
+    background-color: white;
+}
+
+canvas {
+    display: block;
+
+}
+
+.cubebox{
+  height: 50px;
+  width :400px;
+  border: 2px solid black;
+}
+
+div.ex1 {
+  background-color: #D3D3D3;
+  width: 505px;
+  height: 300px;
+  overflow: auto;
+  border: 1px solid grey;
+}
+
+.tabley{
+  width:400px;
+  height:300px;
+  border: 1px solid black;
+}
+
+
+/* Style the tab */
+.tab {
+  overflow: auto;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  width:164px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
   display: none;
+   padding-left: 520px;
+  border-top: none;
 }
 
-/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
-.active {
+
+/* Style the tab */
+.wrld {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 200px;
+
+
+}
+
+/* Style the buttons inside the tab */
+.wrld button {
   display: block;
+  background-color: inherit;
+  color: black;
+  width: 200px;
+  border: 1px solid #ccc;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+
+}
+
+/* Change background color of buttons on hover */
+.wrld button:hover {
+  background-color: #D3D3D3;
+}
+
+/* Create an active/current "tab button" class */
+.wrld button.active {
+  background-color: #A9A9A9;
+}
+
+/* Style the tab content */
+.wrldcontent {
+  float: left;
+
+  border: 1px solid #ccc;
+  width: 70%;
+
+  border-left: none;
+}
+
+
+/* Style the close button */
+.topright {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.topright:hover {color: red;}
+
+
+.iframetab{
+  background-color: #ffffff;
+
+}
+.smallsize{
+  font-size: 10px;
+}
+
+.styletitle{
+  color: "red";
+  border:  2px solid grey;
+  padding: 1px 1px;
+}
+
+#contents{
+  border:  2px solid rey;
+  padding: 2px 2px;
+}
+
+
+.tabc {
+    overflow: hidden;
+    border: 1px solid grey;
+    background-color: #f1f1f1;
+    /*width: 140px;*/
+    
+}
+
+/* Style the buttons inside the wrld */
+.tabc button {
+    background-color: inherit;
+    float: left;
+    border: 2px solid black;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    /*width:140px;*/
+
+}
+
+/* Change background color of buttons on hover */
+.tabc button:hover {
+    background-color: #ddd;
+}
+
+.tabc button.active {
+    background-color: #ccc;
+}
+
+/* Style the wrld content */
+.cordcontent {
+    display: none;
+    padding: 6px 12px;
+    width: 100%;
+    border-top: none;
 }
