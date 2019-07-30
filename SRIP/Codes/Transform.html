@@ -11,7 +11,7 @@
 
 </head>
 
-<body style="background-color: #D3D3D3;" class="container border border-secondary" style="height: 90vh;" >
+<body style="background-color: #D3D3D3;" class="border border-secondary" style="height: 90vh; padding-left: 10px; padding-bottom: 80px;  " >
 	<h3 class="styletitle" style="text-align: center;"> Experiment 5a : Hierarchial Transformation </h3>
 	
 <!--canvas id="renderCanvas" style="width: 7px;height: 7px;"></canvas-->
@@ -55,10 +55,10 @@
 		                Sorry your browser does not support inline frames.
 		             </iframe>
 		       			<br>
-		           
+		           <!-- 
 		               <p class="h3">World</p>
 
-		               <br>
+		               <br> -->
 		            		  
 		             <!--h4 >Click below to change the vertices and faces of the following figures
 		              <br> 
@@ -79,7 +79,7 @@
 				
 
 				<div id="trianglee" class="wrldcontent" >
-					    <div class="card" style="height: 20rem;overflow: auto;">      
+					    <div class="card" style="height: 18rem;overflow: auto;">      
 				<div class="accordion" id="accordionExample">
 					  <div class="card">
 					    <div class="card-header" id="headingOne">
@@ -92,12 +92,12 @@
 
 					    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 					      <div class="card-body">
-					      	  <br>X :
+					      	  <b>X :</b>
 					          <input type="Number" id="TriX" class="tbox" value="0" />
-					          <br>Y :
+					          <b>Y :</b>
 					          <input type="Number" id="TriY" class="tbox" value="0" />
-					          <br>Z :
-					          <input type="Number" id="TriZ" class="tbox" value="0" /><br>
+					          <b>Z :</b>
+					          <input type="Number" id="TriZ" class="tbox" value="0" />
 					          <button class=" " onclick="TriTrans()">Submit</button>
 					      </div>
 					    </div>
@@ -117,13 +117,13 @@
 
 					    <div id="collapsex" class="collapse" aria-labelledby="headingx" data-parent="#accordionExample2">
 					      <div class="card-body">
-					      	 Scales by < 
+					      	 <b>Scale by</b> < 
 				<input type="Number" id="ScaletX" class="tbox" value="3"  />
 				<input type="Number" id="ScaletY" class="tbox" value="2" />
 				<input type="Number" id="ScaletZ" class="tbox" value="1"  /> in 
 				 <input type="Number"  id="fsct" class="tbox" value="1000" /> frames <br>
 
-				 Translate by < 
+				 <b>Translate by</b> < 
 					          <input type="Number" id="xtlt" class="tbox" value="-2" />
 					          
 					          <input type="Number" id="ytlt" class="tbox" value="-1" />
@@ -131,14 +131,14 @@
 					          <input type="Number" id="ztlt" class="tbox" value="0" /> > in
 					          <input type="Number" id="ftlt" class="tbox" value="1000" /> frames <br>
 					          
-					         	Rotate by <
+					         	<b>Rotate by</b> <
 
 					          <input type="Number" id="Rotavaluet" class="tbox" value="180" />
 					       axes 
 					          <input type="text" id="Rotat" class="tbox" value="Z" /> > in
 					          <input type="Number" id="frtt" class="tbox" value="1000" /> frames <br>
 					          
-					          Translate by <
+					          <b>Translate by</b> <
 
 					          <input type="Number" id="xtl1t" class="tbox" value="2" />
 					          
@@ -194,23 +194,29 @@
 					    <div id="collapsez" class="collapse" aria-labelledby="headingz" data-parent="#accordionExample4">
 					      <div class="card-body">
 					       
-					      	   	Click to change the original coordinates<br/>
-					    <input type="Number" id="TriangleiX1" class="tbox" value="4" />
-						<input type="Number" id="TriangleiY1" class="tbox" value="3" />
-						<input type="Number" id="TriangleiZ1" class="tbox" value="0" />
-						<br/>
+					      	   	<b>Click to change the original coordinates</b><p class="text-danger">Range of co-ordinates is -5 to +5 only.<br> <i>Please don't give value out of range, it may not give appropriate results </i></p>
+					      	   	<form>
+					    <input type="Number" id="TriangleiX1" class="tbox" value="4"  min="-5" max="5" />
+						<input type="Number" id="TriangleiY1" class="tbox" value="3"  min="-5" max="5" />
+						<input type="Number" id="TriangleiZ1" class="tbox" value="0"  min="-5" max="5" />
+						
+						<br>
 
-						<input type="Number" id="TriangleiX2" class="tbox" value="0" />
-						<input type="Number" id="TriangleiY2" class="tbox" value="4" />
-						<input type="Number" id="TriangleiZ2" class="tbox" value="0" />
-						<br/>
+						<input type="Number" id="TriangleiX2" class="tbox" value="0"  min="-5" max="5" />
+						<input type="Number" id="TriangleiY2" class="tbox" value="4"  min="-5" max="5" />
+						<input type="Number" id="TriangleiZ2" class="tbox" value="0"  min="-5" max="5" />
 
-						<input type="Number" id="TriangleiX3" class="tbox" value="2" />
-						<input type="Number" id="TriangleiY3" class="tbox" value="1" />
-						<input type="Number" id="TriangleiZ3" class="tbox" value="0" />
-						<br/>
-					       <button class=" " onclick="TriInput()">SubmitVertices</button>
-					<br/>
+						<br>
+
+						<input type="Number" id="TriangleiX3" class="tbox" value="2"  min="-5" max="5" />
+						<input type="Number" id="TriangleiY3" class="tbox" value="1"  min="-5" max="5" />
+						<input type="Number" id="TriangleiZ3" class="tbox" value="0"  min="-5" max="5" />
+						<br>
+						<br>
+
+					    <button class="btn btn-dark" onclick="TriInput()">Submit Vertices</button>
+					</form>
+					<br>
 					
 					      </div>
 					    </div>
@@ -279,7 +285,7 @@
 
 
 				<div id="cubee" class="wrldcontent" >
-		<div class="card" style="height: 20rem;overflow: auto;">      
+		<div class="card" style="height: 18rem;overflow: auto;">      
 
 					<div class="accordion" id="accordionExamplec">
 					  <div class="card">
@@ -293,12 +299,12 @@
 
 					    <div id="collapsecOne" class="collapse" aria-labelledby="headingcOne" data-parent="#accordionExamplec">
 					      <div class="card-body">
-					       X:
-						<input type="Number" id="CubeX" class="tbox" value="0" /><br>
-						Y:
-					<input type="Number" id="CubeY" class="tbox" value="0" /><br>
-					Z:
-					<input type="Number" id="CubeZ" class="tbox" value="0" /><br>
+					       <b>X:</b>
+						<input type="Number" id="CubeX" class="tbox" value="0" />
+						<b>Y:</b>
+					<input type="Number" id="CubeY" class="tbox" value="0" />
+					<b>Z:</b>
+					<input type="Number" id="CubeZ" class="tbox" value="0" />
 					<button class=" " onclick="CubeTrans()">Submit</button><br>
 						
 					      </div>
@@ -320,12 +326,12 @@
 
 					    <div id="collapsecx" class="collapse" aria-labelledby="headingcx" data-parent="#accordionExamplec2">
 					      <div class="card-body">
-					            	 Scales by < 
+					            	 <b>Scale by</b> < 
 				<input type="Number" id="ScalecX" class="tbox" value="3"  />
 				<input type="Number" id="ScalecY" class="tbox" value="2" />
 				<input type="Number" id="ScalecZ" class="tbox" value="1"  /> in 
 				 <input type="Number"  id="fscc" class="tbox" value="1000" /> frames <br>
-				  Translate by < 
+				  <b>Translate by</b> < 
 					          <input type="Number" id="xtlc" class="tbox" value="-2" />
 					          
 					          <input type="Number" id="ytlc" class="tbox" value="-1" />
@@ -333,14 +339,14 @@
 					          <input type="Number" id="ztlc" class="tbox" value="0" /> > in
 					          <input type="Number" id="ftlc" class="tbox" value="1000" /> frames <br>
 					          
-					         	Rotate by <
+					         	<b>Rotate by</b> <
 
 					          <input type="Number" id="Rotavaluec" class="tbox" value="180" />
 					       axes 
 					          <input type="text" id="Rotac" class="tbox" value="Z" /> > in
 					          <input type="Number" id="frtc" class="tbox" value="1000" /> frames <br>
 					          
-					          Translate by <
+					          <b><b>Translate by</b></b> <
 
 					          <input type="Number" id="xtl1c" class="tbox" value="2" />
 					          
@@ -358,7 +364,7 @@
 				<div class="accordion" id="accordionExampleC">
 					  <div class="card">
 
-					      <div class="card-body">
+					      <div class="card-body" >
 					       <input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw<br>
 						<input type="checkbox" id="CubeActive" onclick="ActiveCube()"/>Active
 					
@@ -393,49 +399,53 @@
 
 					    <div id="collapsecz" class="collapse" aria-labelledby="headingcz" data-parent="#accordionExamplec4">
 					      <div class="card-body">
-					       Click to change the original coordinates<br/>
-					    <input type="Number" id="CubeiX1" class="tbox" value="-1" />
-						<input type="Number" id="CubeiY1" class="tbox" value="-1" />
-						<input type="Number" id="CubeiZ1" class="tbox" value="1" />
+					       <b>Click to change the original coordinates</b><p class="text-danger">Range of co-ordinates is -5 to +5 only.<br> <i>Please don't give value out of range, it may not give appropriate results </i></p>
+					       <br>
+					       <form>
+					    <input type="Number" id="CubeiX1" class="tbox" value="-1"  min="-5" max="5" />
+						<input type="Number" id="CubeiY1" class="tbox" value="-1"  min="-5" max="5" />
+						<input type="Number" id="CubeiZ1" class="tbox" value="1"  min="-5" max="5" />
 						<br/>
 
-						<input type="Number" id="CubeiX2" class="tbox" value="1" />
-						<input type="Number" id="CubeiY2" class="tbox" value="-1" />
-						<input type="Number" id="CubeiZ2" class="tbox" value="1" />
+						<input type="Number" id="CubeiX2" class="tbox" value="1"  min="-5" max="5"/>
+						<input type="Number" id="CubeiY2" class="tbox" value="-1"  min="-5" max="5"/>
+						<input type="Number" id="CubeiZ2" class="tbox" value="1" min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="CubeiX3" class="tbox" value="-1" />
-						<input type="Number" id="CubeiY3" class="tbox" value="1" />
-						<input type="Number" id="CubeiZ3" class="tbox" value="1" />
+						<input type="Number" id="CubeiX3" class="tbox" value="-1" min="-5" max="5" />
+						<input type="Number" id="CubeiY3" class="tbox" value="1" min="-5" max="5"/>
+						<input type="Number" id="CubeiZ3" class="tbox" value="1" min="-5" max="5"/>
 						<br/>
 	
-						<input type="Number" id="CubeiX4" class="tbox" value="1" />
-						<input type="Number" id="CubeiY4" class="tbox" value="1" />
-						<input type="Number" id="CubeiZ4" class="tbox" value="1" />
+						<input type="Number" id="CubeiX4" class="tbox" value="1" min="-5" max="5"/>
+						<input type="Number" id="CubeiY4" class="tbox" value="1" min="-5" max="5"/>
+						<input type="Number" id="CubeiZ4" class="tbox" value="1" min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="CubeiX5" class="tbox" value="-1" />
-						<input type="Number" id="CubeiY5" class="tbox" value="-1" />
-						<input type="Number" id="CubeiZ5" class="tbox" value="-1" />
+						<input type="Number" id="CubeiX5" class="tbox" value="-1" min="-5" max="5"/>
+						<input type="Number" id="CubeiY5" class="tbox" value="-1" min="-5" max="5"/>
+						<input type="Number" id="CubeiZ5" class="tbox" value="-1" min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="CubeiX6" class="tbox" value="1" />
-						<input type="Number" id="CubeiY6" class="tbox" value="-1" />
-						<input type="Number" id="CubeiZ6" class="tbox" value="-1" />
+						<input type="Number" id="CubeiX6" class="tbox" value="1" min="-5" max="5"/>
+						<input type="Number" id="CubeiY6" class="tbox" value="-1" min="-5" max="5"/>
+						<input type="Number" id="CubeiZ6" class="tbox" value="-1" min="-5" max="5" />
 						<br/>
 						
-						<input type="Number" id="CubeiX7" class="tbox" value="-1" />
-						<input type="Number" id="CubeiY7" class="tbox" value="1" />
-						<input type="Number" id="CubeiZ7" class="tbox" value="-1" />
+						<input type="Number" id="CubeiX7" class="tbox" value="-1" min="-5" max="5"/>
+						<input type="Number" id="CubeiY7" class="tbox" value="1" min="-5" max="5"/>
+						<input type="Number" id="CubeiZ7" class="tbox" value="-1" min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="CubeiX8" class="tbox" value="1" />
-						<input type="Number" id="CubeiY8" class="tbox" value="1" />
-						<input type="Number" id="CubeiZ8" class="tbox" value="-1" />
+						<input type="Number" id="CubeiX8" class="tbox" value="1" min="-5" max="5"/>
+						<input type="Number" id="CubeiY8" class="tbox" value="1" min="-5" max="5" />
+						<input type="Number" id="CubeiZ8" class="tbox" value="-1" min="-5" max="5"/>
+					</form>
 						<br/>
+						<br>
 						
 					
-					<button class=" " onclick="CubeInput()">SubmitVertices</button>
+					<button class=" " onclick="CubeInput()">Submit Vertices</button>
 		
 
 					      
@@ -566,7 +576,7 @@
 
 
 		<div id="dodecahedronn" class="wrldcontent">
-			<div class="card" style="height: 20rem;overflow: auto;">      
+			<div class="card" style="height: 18rem;overflow: auto;">      
 
 
 			<div class="accordion" id="accordionExampled">
@@ -581,13 +591,13 @@
 
 					    <div id="collapsedOne" class="collapse" aria-labelledby="headingdOne" data-parent="#accordionExample">
 					      <div class="card-body">
-					      			X:
-					<input type="Number" id="DodecX" class="tbox" value="0" /><br>
-								Y:
-					<input type="Number" id="DodecY" class="tbox" value="0" /><br>
-					Z:
+					      			<b>X:</b>
+					<input type="Number" id="DodecX" class="tbox" value="0" />
+								<b>Y:</b>
+					<input type="Number" id="DodecY" class="tbox" value="0" />
+					<b>Z:</b>
 
-					<input type="Number" id="DodecZ" class="tbox" value="0" /><br>
+					<input type="Number" id="DodecZ" class="tbox" value="0" />
 
 					<button class=" " onclick="DodecTrans()">Submit
 					</button>
@@ -609,13 +619,13 @@
 
 					    <div id="collapsedx" class="collapse" aria-labelledby="headingdx" data-parent="#accordionExampled2">
 					      <div class="card-body">
-					            	 Scales by < 
+					            	 <b>Scale by</b> < 
 				<input type="Number" id="ScaledX" class="tbox" value="3"  />
 				<input type="Number" id="ScaledY" class="tbox" value="2" />
 				<input type="Number" id="ScaledZ" class="tbox" value="1"  /> in 
 				 <input type="Number"  id="fscd" class="tbox" value="1000" /> frames <br>
 
-				  Translate by < 
+				  <b>Translate by</b> < 
 					          <input type="Number" id="xtld" class="tbox" value="-2" />
 					          
 					          <input type="Number" id="ytld" class="tbox" value="-1" />
@@ -623,14 +633,14 @@
 					          <input type="Number" id="ztld" class="tbox" value="0" /> > in
 					          <input type="Number" id="ftld" class="tbox" value="1000" /> frames <br>
 					          
-					         	Rotate by <
+					         	<b>Rotate by</b> <
 
 					          <input type="Number" id="Rotavalued" class="tbox" value="180" />
 					       axes 
 					          <input type="text" id="Rotad" class="tbox" value="Z" /> > in
 					          <input type="Number" id="frtd" class="tbox" value="1000" /> frames <br>
 					          
-					          Translate by <
+					          <b>Translate by</b> <
 
 					          <input type="Number" id="xtl1d" class="tbox" value="2" />
 					          
@@ -684,108 +694,112 @@
 
 					    <div id="collapsedz" class="collapse" aria-labelledby="headingdz" data-parent="#accordionExampled4">
 					      <div class="card-body">
-					       Click to change the original coordinates<br/>
-					    <input type="Number" id="DodecahedroniX1" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniY1" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniZ1" class="tbox" value="0.58" />
+					       <b>Click to change the original coordinates</b><p class="text-danger">(Range of co-ordinates is -5 to +5 only.
+					       	<br> <i>Please don't give value out of range, it may not give apropriate results </i>)</p>
+<br/>
+<form>
+					    <input type="Number" id="DodecahedroniX1" class="tbox" value="-0.58" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY1" class="tbox" value="-0.58" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ1" class="tbox" value="0.58" min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX2" class="tbox" value="0.93" />
-						<input type="Number" id="DodecahedroniY2" class="tbox" value="0.36" />
-						<input type="Number" id="DodecahedroniZ2" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniX2" class="tbox" value="0.93"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY2" class="tbox" value="0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ2" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX3" class="tbox" value="0.93" />
-						<input type="Number" id="DodecahedroniY3" class="tbox" value="-0.36" />
-						<input type="Number" id="DodecahedroniZ3" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniX3" class="tbox" value="0.93"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY3" class="tbox" value="-0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ3" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 	
-						<input type="Number" id="DodecahedroniX4" class="tbox" value="-0.93" />
-						<input type="Number" id="DodecahedroniY4" class="tbox" value="0.36" />
-						<input type="Number" id="DodecahedroniZ4" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniX4" class="tbox" value="-0.93" min="-5" max="5" />
+						<input type="Number" id="DodecahedroniY4" class="tbox" value="0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ4" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX5" class="tbox" value="-0.93" />
-						<input type="Number" id="DodecahedroniY5" class="tbox" value="-0.36" />
-						<input type="Number" id="DodecahedroniZ5" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniX5" class="tbox" value="-0.93"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY5" class="tbox" value="-0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ5" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="DodecahedroniX6" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniY6" class="tbox" value="0.93" />
-						<input type="Number" id="DodecahedroniZ6" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniX6" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY6" class="tbox" value="0.93"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ6" class="tbox" value="0.36"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="DodecahedroniX7" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniY7" class="tbox" value="0.93" />
-						<input type="Number" id="DodecahedroniZ7" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniX7" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY7" class="tbox" value="0.93"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ7" class="tbox" value="-0.36"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="DodecahedroniX8" class="tbox" value="0.36" />
-						<input type="Number" id="DodecahedroniY8" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniZ8" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniX8" class="tbox" value="0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY8" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ8" class="tbox" value="-0.93"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="DodecahedroniX9" class="tbox" value="-0.36" />
-						<input type="Number" id="DodecahedroniY9" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniZ9" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniX9" class="tbox" value="-0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY9" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ9" class="tbox" value="-0.93"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX10" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniY10" class="tbox" value="-0.93" />
-						<input type="Number" id="DodecahedroniZ10" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniX10" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY10" class="tbox" value="-0.93"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ10" class="tbox" value="-0.36"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX11" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniY11" class="tbox" value="-0.93" />
-						<input type="Number" id="DodecahedroniZ11" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniX11" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY11" class="tbox" value="-0.93"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ11" class="tbox" value="-0.36"  min="-5" max="5" />
 						<br/>
 	
-						<input type="Number" id="DodecahedroniX12" class="tbox" value="0.36" />
-						<input type="Number" id="DodecahedroniY12" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniZ12" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniX12" class="tbox" value="0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY12" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ12" class="tbox" value="0.93"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX13" class="tbox" value="-0.36" />
-						<input type="Number" id="DodecahedroniY13" class="tbox" value="0" />
-						<input type="Number" id="DodecahedroniZ13" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniX13" class="tbox" value="-0.36"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY13" class="tbox" value="0" min="-5" max="5" />
+						<input type="Number" id="DodecahedroniZ13" class="tbox" value="0.93"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="DodecahedroniX14" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniY14" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniZ14" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniX14" class="tbox" value="0.58"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY14" class="tbox" value="0.58" min="-5" max="5" />
+						<input type="Number" id="DodecahedroniZ14" class="tbox" value="-0.58"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="DodecahedroniX15" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniY15" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniZ15" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniX15" class="tbox" value="0.58"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY15" class="tbox" value="0.58"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ15" class="tbox" value="0.58"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="DodecahedroniX16" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniY16" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniZ16" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniX16" class="tbox" value="-0.58"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY16" class="tbox" value="0.58"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ16" class="tbox" value="-0.58"  min="-5" max="5"/>
 						<br/>
-						<input type="Number" id="DodecahedroniX17" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniY17" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniZ17" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniX17" class="tbox" value="-0.58"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY17" class="tbox" value="0.58"  min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ17" class="tbox" value="0.58"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX18" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniY18" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniZ18" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniX18" class="tbox" value="0.58"  min="-5" max="5" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY18" class="tbox" value="-0.58"  min="-5" max="5" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ18" class="tbox" value="-0.58"  min="-5" max="5" min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="DodecahedroniX19" class="tbox" value="0.58" />
-						<input type="Number" id="DodecahedroniY19" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniZ19" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniX19" class="tbox" value="0.58"  min="-5" max="5" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY19" class="tbox" value="-0.58"  min="-5" max="5" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ19" class="tbox" value="0.58"  min="-5" max="5" min="-5" max="5"/>
 						<br/>
 	
-						<input type="Number" id="DodecahedroniX20" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniY20" class="tbox" value="-0.58" />
-						<input type="Number" id="DodecahedroniZ20" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniX20" class="tbox" value="-0.58"  min="-5" max="5" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniY20" class="tbox" value="-0.58"  min="-5" max="5" min="-5" max="5"/>
+						<input type="Number" id="DodecahedroniZ20" class="tbox" value="-0.58"  min="-5" max="5" min="-5" max="5"/>
 						<br/>
 					
-					<button class=" " onclick="DodecaInput()">SubmitVertices</button>
+					<button class=" " onclick="DodecaInput()">Submit Vertices</button>
 					<br/>
+				</form>
 					      </div>
 					    </div>
 					  </div>
@@ -1038,7 +1052,7 @@
 
 
 				<div id="icosahedronn" class="wrldcontent">
-				<div class="card" style="height: 20rem;overflow: auto;">       
+				<div class="card" style="height: 18rem;overflow: auto;">       
 
 
 				 <div class="accordion" id="accordionExamplei">
@@ -1053,12 +1067,12 @@
 
 					    <div id="collapseiOne" class="collapse" aria-labelledby="headingiOne" data-parent="#accordionExample">
 					      <div class="card-body">
-					       	X:
-					 	<input type="Number" id="IcoX" class="tbox" value="0" /><br>
-					 	Y:
-						<input type="Number" id="IcoY" class="tbox" value="0" /><br>
-						Z:
-						<input type="Number" id="IcoZ" class="tbox" value="0" /><br>
+					       	<b>X:</b>
+					 	<input type="Number" id="IcoX" class="tbox" value="0" />
+					 	<b>Y:</b>
+						<input type="Number" id="IcoY" class="tbox" value="0" />
+						<b>Z:</b>
+						<input type="Number" id="IcoZ" class="tbox" value="0" />
 
 						<button class=" " onclick="IcosaTrans()">Submit</button>
 					 	<br>
@@ -1080,13 +1094,13 @@
 
 					    <div id="collapseix" class="collapse" aria-labelledby="headingix" data-parent="#accordionExamplei2">
 					      <div class="card-body">
-					       	 Scales by < 
+					       	 <b>Scale by</b> < 
 				<input type="Number" id="ScalehX" class="tbox" value="3" />
 				<input type="Number" id="ScalehY" class="tbox" value="2"/>
 				<input type="Number" id="ScalehZ" class="tbox" value="1" /> in 
 				 <input type="Number"  id="fsch" class="tbox" value="1000" /> frames <br>
 
-				  Translate by < 
+				  <b>Translate by</b> < 
 					          <input type="Number" id="xtli" class="tbox" value="-2" />
 					          
 					          <input type="Number" id="ytli" class="tbox" value="-1" />
@@ -1094,14 +1108,14 @@
 					          <input type="Number" id="ztli" class="tbox" value="0" /> > in
 					          <input type="Number" id="ftli" class="tbox" value="1000" /> frames <br>
 					          
-					         	Rotate by <
+					         	<b>Rotate by</b> <
 
 					          <input type="Number" id="Rotavaluei" class="tbox" value="180" />
 					       axes 
 					          <input type="text" id="Rotai" class="tbox" value="Z" /> > in
 					          <input type="Number" id="frti" class="tbox" value="1000" /> frames <br>
 					          
-					          Translate by <
+					          <b>Translate by</b> <
 
 					          <input type="Number" id="xtl1i" class="tbox" value="2" />
 					          
@@ -1155,69 +1169,72 @@
 					    <div id="collapseiz" class="collapse" aria-labelledby="headingiz" data-parent="#accordionExamplei4">
 					      <div class="card-body">
 					       
-					      Click to change the original coordinates<br/>
-					    <input type="Number" id="IcosahedroniX1" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniY1" class="tbox" value="-0.53" />
-						<input type="Number" id="IcosahedroniZ1" class="tbox" value="0.85" />
+					      <b>Click to change the original coordinates</b>
+					      <p class="text-danger">(Range of co-ordinates is -10 to +20 )</p><br/>
+					      <form>
+					    <input type="Number" id="IcosahedroniX1" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY1" class="tbox" value="-0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ1" class="tbox" value="0.85"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="IcosahedroniX2" class="tbox" value="0.85" />
-						<input type="Number" id="IcosahedroniY2" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniZ2" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniX2" class="tbox" value="0.85"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY2" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ2" class="tbox" value="0.53"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="IcosahedroniX3" class="tbox" value="0.85" />
-						<input type="Number" id="IcosahedroniY3" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniZ3" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniX3" class="tbox" value="0.85" min="-5" max="5" />
+						<input type="Number" id="IcosahedroniY3" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ3" class="tbox" value="-0.53"  min="-5" max="5"/>
 						<br/>
 	
-						<input type="Number" id="IcosahedroniX4" class="tbox" value="-0.85" />
-						<input type="Number" id="IcosahedroniY4" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniZ4" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniX4" class="tbox" value="-0.85"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY4" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ4" class="tbox" value="-0.53"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="IcosahedroniX5" class="tbox" value="-0.85" />
-						<input type="Number" id="IcosahedroniY5" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniZ5" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniX5" class="tbox" value="-0.85"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY5" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ5" class="tbox" value="0.53"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="IcosahedroniX6" class="tbox" value="-0.53" />
-						<input type="Number" id="IcosahedroniY6" class="tbox" value="0.85" />
-						<input type="Number" id="IcosahedroniZ6" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniX6" class="tbox" value="-0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY6" class="tbox" value="0.85"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ6" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="IcosahedroniX7" class="tbox" value="0.53" />
-						<input type="Number" id="IcosahedroniY7" class="tbox" value="0.85" />
-						<input type="Number" id="IcosahedroniZ7" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniX7" class="tbox" value="0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY7" class="tbox" value="0.85" min="-5" max="5" />
+						<input type="Number" id="IcosahedroniZ7" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="IcosahedroniX8" class="tbox" value="0.53" />
-						<input type="Number" id="IcosahedroniY8" class="tbox" value="-0.85" />
-						<input type="Number" id="IcosahedroniZ8" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniX8" class="tbox" value="0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY8" class="tbox" value="-0.85"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ8" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 						
-						<input type="Number" id="IcosahedroniX9" class="tbox" value="-0.53" />
-						<input type="Number" id="IcosahedroniY9" class="tbox" value="-0.85" />
-						<input type="Number" id="IcosahedroniZ9" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniX9" class="tbox" value="-0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY9" class="tbox" value="-0.85" min="-5" max="5" />
+						<input type="Number" id="IcosahedroniZ9" class="tbox" value="0"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="IcosahedroniX10" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniY10" class="tbox" value="-0.53" />
-						<input type="Number" id="IcosahedroniZ10" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniX10" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY10" class="tbox" value="-0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ10" class="tbox" value="-0.85"  min="-5" max="5"/>
 						<br/>
 
-						<input type="Number" id="IcosahedroniX11" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniY11" class="tbox" value="0.53" />
-						<input type="Number" id="IcosahedroniZ11" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniX11" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY11" class="tbox" value="0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ11" class="tbox" value="-0.85"  min="-5" max="5" />
 						<br/>
 	
-						<input type="Number" id="IcosahedroniX12" class="tbox" value="0" />
-						<input type="Number" id="IcosahedroniY12" class="tbox" value="0.53" />
-						<input type="Number" id="IcosahedroniZ12" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniX12" class="tbox" value="0"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniY12" class="tbox" value="0.53"  min="-5" max="5"/>
+						<input type="Number" id="IcosahedroniZ12" class="tbox" value="0.85"  min="-5" max="5"/>
 						<br/>
 
 					
-					<button class=" " onclick="IcosaInput()">SubmitVertices</button>
+					<button class=" " onclick="IcosaInput()">Submit Vertices</button>
+				</form>
 					<br/>
 					      </div>
 					    </div>
