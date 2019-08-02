@@ -1,6 +1,3 @@
- sliders {
-        background: none;
-    }
 
 
 body {
@@ -9,36 +6,38 @@ body {
   background-color: #D3D3D3;
 }
 
-
 .slider {
   -webkit-appearance: none;
-  width: 80%;
-  height: 12px;
+  width: 100%;
+  height: 10px;
   border-radius: 5px;
-  background: #A3A3A3;
+  background: #7e8ff2;
   outline: none;
-  opacity: 1;
+  opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+  
 }
 
-
+.slider:hover {
+  opacity: 1;
+}
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 0%;
-  background: #00008b;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0c1be8;
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-  width: 25px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background:#A3A3A3 ;
+  background: #0c1be8;
   cursor: pointer;
 }
 
