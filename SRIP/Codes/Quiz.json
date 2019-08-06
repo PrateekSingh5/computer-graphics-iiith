@@ -1,0 +1,261 @@
+{
+    "artciles": [
+        {
+            "quiztitle":"Quiz for Experiment",
+            "containers":"5"
+        },
+        {
+            "q": "1.    _________ is a rigid body transformation that moves objects without deformation",
+            "option": [
+                "Translation",
+                "Scaling",
+                "All of the above"
+            ],
+            "answer": "Translation",
+            "description": "Translation a rigid body transformation that moves objects without deformation"
+        },
+        {
+            "q": "2. A translation is applied to an object by",
+            "option": [
+                "Repositioning it along with circular path",
+                "Repositioning it along with straight line path",
+                "Both a and b"
+                
+            ],
+            "answer": "Repositioning it along with straight line path",
+            "description": "A translation is applied to an object by repositioning it along with straight line path from one location to another."
+        },
+        {
+            "q": "3. The translation distances (dx, dy) is called as",
+            "option": [
+                "Shift vector",
+                "Translation vector",
+                "Both a and b"
+
+            ],
+            "answer": "Both a and b",
+            "description": "The translation distances (dx, dy) from its original position is called as translation vector or shift vector."
+        },
+        {
+            "q": "4.The two-dimensional translation equation in the matrix form is",
+            "option": [
+                "P'=P-T",
+                "P'=P+T",
+                "P'=P*T"
+                
+            ],
+            "answer": "P’=P+T",
+            "description": "The 2D translation equation is P’=P+T"
+        },
+        {
+            "q": "5.We translate a two-dimensional point by adding",
+            "option": [
+                "Translation distances",
+                "Translation difference",
+                "Only a"
+            ],
+            "answer": "Only a",
+            "description": "We can translate 2D point by adding translation distances dx and dy."
+        },
+        {
+            "q": "6.In 2D-translation, a point (x, y) can move to the new position (x’, y’) by using the equation",
+            "option": [
+                "x’=x+dx and y’=y+dx",
+                " x’=x+dx and y’=y+dy",
+                "X’=x+dy and Y’=y+dx"
+            ],
+            "answer": " x’=x+dx and y’=y+dy",
+            "description": "By adding translation distance dx and dy to its originsl position (x, y) we can obtain a new position (x’, y’)."
+        },
+        {
+            "q": "7. A straight line segment is translated by applying the transformation equation",
+            "option": [
+                "P’=P+T",
+                "Dx and Dy",
+                " P’=P+P"
+            ],
+            "answer": "P’=P+T",
+            "description": "EA straight line segment is translated by applying the transformation equation P’=P+T to each of line endpoints."
+        },
+        {
+            "q": "To generate a rotation , we must specify",
+            "option": [
+                "Rotation angle ϴ",
+                "Distances dx and dy",
+                "Rotation distance"
+            ],
+            "answer": "Rotation angle ϴ",
+            "description": "Generate a rotation, we must specify rotation angle ϴ of the rotation point or pivot point which the object is to be rotated."
+        },
+        {
+            "q": "9.Positive values for the rotation angle ϴ defines",
+            "option": [
+                "Counterclockwise rotations about the end points",
+                "Counterclockwise translation about the pivot point",
+                "Counterclockwise rotations about the pivot point"
+            ],
+            "answer": "Counterclockwise rotations about the pivot point",
+            "description": "A positive value for the rotation angle ϴ defines counterclockwise rotations about the pivot point"
+        },
+        {
+            "q": "10.The rotation axis that is perpendicular to the xy plane and passes through the pivot point is known as",
+            "option": [
+                "Rotation",
+                "Translation",
+                "Scaling"
+            ],
+            "answer": "Rotation",
+            "description": "The rotation transformation is also described as a rotation about a rotation axis that is perpendicular to the xy plane and passes through the pivot point.",
+        }
+        {
+            "q": "11.The original coordinates of the point in polor coordinates are",
+            "option": [
+                "X’=r cos (Ф +ϴ) and Y’=r cos (Ф +ϴ)",
+                "X’=r cos (Ф +ϴ) and Y’=r sin (Ф +ϴ)",
+                "Option 3"
+            ],
+            "answer": "X’=r cos (Ф +ϴ) and Y’=r sin (Ф +ϴ)",
+            "description": " The original coordinates of the point in polor coordinates are X’=r cos (Ф +ϴ) and Y’=r sin (Ф +ϴ)",
+        },
+        {
+            "q": "12.The two-dimensional rotation equation in the matrix form is",
+            "option": [
+                "P’=P+T",
+                "P’=R*P",
+                " P’=P*P"
+            ],
+            "answer": "P’=R*P",
+            "description": "The 2D translation equation is P’=R*P."
+        },
+        {
+            "q": "13.The transformation that is used to alter the size of an object is",
+            "option": [
+                "Scaling",
+                "Rotation",
+                "Translation"
+            ],
+            "answer": "Scaling",
+            "description": "Scaling is used to alter the size of an object."
+        },
+        {
+            "q": "14.If the scaling factors values sx and sy < 1 then",
+            "option": [
+                "It reduces the size of object",
+                " It increases the size of object",
+                "It stunts the shape of an object"
+            ],
+            "answer": "It reduces the size of object",
+            "description": "If the scaling factors values sx and sy < 1 then it reduces the size of object."
+        },
+        {
+            "q": "15.If the scaling factors values sx and sy are assigned to the same value then",
+            "option": [
+                "Uniform rotation is produced",
+                "OScaling cannot be done",
+                "Uniform scaling is produced"
+            ],
+            "answer": "Uniform scaling is produced",
+            "description": "When sx and sy are assigned the same value then uniform scaling is produced that maintains relative object proportions."
+        },
+        {
+            "q": "16.If the scaling factors values sx and sy are assigned to unequal values then",
+            "option": [
+                "Uniform rotation is produced",
+                "Uniform scaling is produced",
+                "Differential scaling is produced"
+            ],
+            "answer": "Differential scaling is produced",
+            "description": "Unequal values for sx and sy results in differential scaling that is often used in design applications"
+        },
+        {
+            "q": "17.A ___________ is a system which uses one or more numbers, or coordinates, to uniquely determine the position of a point.co-ordinate system",
+            "option": [
+                "co-ordinate system",
+                "binary-system",
+                "vector-system"
+            ],
+            "answer": "co-ordinate system",
+            "description": "A coordinate system is a system which uses one or more numbers, or coordinates, to uniquely determine the position of a point. It also determines the other geometric elements on a manifold on Euclid space."
+        },
+        {
+            "q": "18.Which of the co-ordinate represents X co-ordinate in (6,8,9)?",
+            "option": [
+                "6",
+                "8",
+                "9"
+            ],
+            "answer": "6",
+            "description": "In a co-ordinate system, any position of a point is denoted as (x,y,z). Where x denotes the perpendicular distance of the point from the x-axis. Hence x is the X co-ordinate."
+        },
+        {
+            "q": "19.Which of the co-ordinate represents Y co-ordinate in (6,8,9)?",
+            "option": [
+                "6",
+                "8",
+                "9"
+            ],
+            "answer": "8",
+            "description": "In a co-ordinate system, any position of a point is denoted as (x,y,z). Where y denotes the perpendicular distance of the point from the y-axis. Hence y is the Y co-ordinate."
+        },
+        {
+            "q": "20. _______________ and ___________ are two types of transformations.",
+            "option": [
+                "quadratic, cubic",
+                "variable, affine",
+                "linear, affine"
+            ],
+            "answer": "linear, affine",
+            "description": "Linear and affine transformations are two different types of transformations of matrices. In linear, points are in vector space but in affine, points are in affine space."
+        },
+        {
+            "q": "21.Adding points to a vector give a vector.",
+            "option": [
+                "True",
+                "False"
+                
+            ],
+            "answer": "False",
+            "description": "dding a vector to a point gives a point, but Subtracting points gives a vector."
+        },
+        {
+            "q": "22.Two successive translations are___________________",
+            "option": [
+                "Multiplicative",
+                "Inverse",
+                "Additive"
+            ],
+            "answer": "Additive",
+            "description": "Successive translations are additive."
+        },
+        {
+            "q": "23.Which of the following is NOT correct? (A, B and C are matrices)",
+            "option": [
+                "A.B = B.A",
+                "A.B.C = (A.B).C = A.(B.C)",
+                "C(A+B) = C.A + C.B"
+            ],
+            "answer": "A.B = B.A",
+            "description": "Matrix multiplication does not commute. We cannot switch the order of the factors and expect to end up with the same result. Hence, A.B ≠ B.A."
+        },
+        {
+            "q": "24.Reflection about the line y=0, the axis, is accomplished with the transformation matrix with how many elements as ‘0’?",
+            "option": [
+                "8",
+                "9",
+                "6"
+            ],
+            "answer": "6",
+            "description": "The matrix used for reflection about y=0 is an identity matrix with 6 ‘0’s and two ‘1’s and one element as ‘-1’"
+        },
+        {
+            "q": "Which transformation distorts the shape of an object such that the transformed shape appears as if the object were composed of internal layers that had been caused to slide over each other?",
+            "option": [
+                "Rotation",
+                "Scaling up",
+                "Shearing"
+            ],
+            "answer": "Shearing",
+            "description": "Two common shearing transformations are the type of transformation that shift coordinate x values coordinate y values. In shear transformation, the transformed shape appears as if the object were composed of internal layers that had been caused to slide over each other."
+        }
+    ]
+}
